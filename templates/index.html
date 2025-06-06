@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio Desktop</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body class="win-theme">
+    <div id="loading-overlay">
+      <div class="loading-text">Now Loading...</div>
+    </div>
+    <div class="content">
+      <div class="theme-switcher">
+        <button id="themeToggleBtn">
+          <div class="menu-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+      <div class="icon-area">
+        <!-- QuotDictアイコン -->
+        <div class="icon">
+          <a href="https://quotdict.onrender.com" class="book-icon-open-cover" data-app="QuotDict" data-link="true">
+            <div class="book-icon-cover"></div>
+          </a>
+          <span class="icon-label">QuotDict</span>
+        </div>
+          <!-- ブラウザアイコン -->
+          <div class="icon">
+            <a href="#" data-app="IntroLog">
+              <div class="icon-safari"></div>
+            </a>
+            <span class="icon-label icon-label-safari">About</span>
+          </div>
+          <div class="icon">
+            <a href="#" data-app="Browser" data-link="true" href="https://example.com">
+              <div class="icon-chrome"></div>
+            </a>
+            <span class="icon-label icon-label-chrome">Chrome</span>
+          </div> 
+      </div>
+      <!-- ウィンドウ風自己紹介 -->
+      <div class="window static-window">
+        <div class="window-header">
+          <span class="red"></span>
+          <span class="yellow"></span>
+          <span class="green"></span>
+        </div>
+        <div class="window-body">
+          <pre>
+            <span class="keyword">class</span> <span class="class">Me</span>:
+            <span class="keyword">def</span> <span class="prop">__init__</span>(self):
+            self.name = <span class="string"><button class="open-log" onclick="showLog()">自己紹介を見る</button></span>
+            self.skills = [<span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"HTML5"</span>]
+            self.vision = <span class="string">"技術で表現する、心地よい世界。"</span>
+          </pre>
+        </div>
+        <!-- 警告ウィンドウ A -->
+        <div class="alert-window warning-a">
+          <button class="close-btn">✖</button>
+          <div class="alert-header">[ SYSTEM ERROR ]</div>
+          <div class="alert-body">
+            Memory access violation.<br>
+            Code: <code>0x001D9</code><br>
+            Status: <span class="blink">CRITICAL</span>
+          </div>
+        </div>
+        <!-- 警告ウィンドウ B -->
+        <div class="alert-window warning-b">
+          <button class="close-btn">✖</button>
+          <div class="alert-header">[ PROCESS FAILURE ]</div>
+          <div class="alert-body">
+            Subsystem communication lost.<br>
+            Code: <code>0x003EE</code><br>
+            Status: <span class="blink">ERROR</span>
+          </div>
+        </div>
+        <!-- ログ風ウィンドウ -->
+        <div class="alert-window warning-c">
+          <button class="close-btn">✖</button>
+          <div class="alert-header">[ ANALYSIS LOG ]</div>
+          <div class="alert-body">
+            <div class="log-body" id="logBody">
+              <div class="cursor" id="cursor">▍</div>
+            </div>
+          </div>
+        </div>
+      </div><!--window static-window-->
+    </div><!--content-->
+    <div id="log-overlay" class="overlay hidden">
+      <div class="log-window" id="log-output">
+        <!-- ログがここに追加される -->
+      </div>
+      <!-- モーダル内に閉じるボタン入れたければ -->
+<button onclick="closeLog()" style="margin-top: 16px;">閉じる</button>
+    </div>
+    <script src="/static/js/script.js"></script>
+  </body>
+</html>
