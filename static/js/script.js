@@ -23,6 +23,7 @@ const ThemeManager = {
     localStorage.setItem("theme", theme);
     this.currentTheme = theme;
     this.updateButtonGlow();
+    delayedPositionNodes();
   },
 
 toggleTheme() {
@@ -296,7 +297,7 @@ function makeDraggable(el) {
 // 初期化
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("theme") || "mac";
+  const saved = localStorage.getItem("theme") || "win";
   ThemeManager.setTheme(saved);
 
   const themeBtn = document.getElementById("themeToggleBtn");
@@ -350,4 +351,101 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".dynamic-window").forEach(w => w.remove());
     history.replaceState(null, "", location.pathname);
   }
+});
+
+// ==========================
+// ノード位置調整
+// ==========================
+function positionNodes() {
+  const nodes = document.querySelectorAll(".node-wrapper[data-target]");
+  nodes.forEach(wrapper => {
+    const targetSelector = wrapper.getAttribute("data-target");
+    const target = document.querySelector(targetSelector);
+    if (!target) return;
+    const targetRect = target.getBoundingClientRect();
+    wrapper.style.position = "absolute";
+    wrapper.style.left = (targetRect.right + window.scrollX + 15) + "px"; // アイコン右端から15pxに変更
+    wrapper.style.top = (targetRect.top + window.scrollY + (targetRect.height / 2) - (wrapper.offsetHeight / 2)) + "px";
+  });
+}
+
+function delayedPositionNodes() {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      positionNodes();
+    });
+  });
+}
+
+
+// ==========================
+// 線の描画更新
+// ==========================
+function updateLines() {
+  const nodes = document.querySelectorAll(".node-wrapper[data-target]");
+  nodes.forEach(wrapper => {
+    const targetSelector = wrapper.getAttribute("data-target");
+    const target = document.querySelector(targetSelector);
+    const line = wrapper.querySelector(".line");
+    if (!target || !line) return;
+
+    const wrapperRect = wrapper.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    const wrapperCenterX = wrapper.offsetWidth / 2;
+    const wrapperCenterY = wrapper.offsetHeight / 2;
+
+    const dx = (targetRect.left + targetRect.width / 2) - (wrapperRect.left + wrapper.offsetWidth / 2);
+    const dy = (targetRect.top + targetRect.height / 2) - (wrapperRect.top + wrapper.offsetHeight / 2);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    line.style.position = "absolute";
+    line.style.left = wrapperCenterX + "px";
+    line.style.top = wrapperCenterY + "px";
+    line.style.width = distance + "px";
+    line.style.transform = `rotate(${angle}deg)`;
+    line.style.transformOrigin = "left center";
+  });
+}
+
+// ==========================
+// ノードのトグル＆中央スクロール
+// ==========================
+document.querySelectorAll(".node-wrapper").forEach(wrapper => {
+  wrapper.addEventListener("click", () => {
+    // 他のノードを非アクティブに
+document.querySelectorAll(".node-wrapper").forEach(el => {
+  el.classList.add("visible");
+});
+    // 自分だけトグル
+    wrapper.classList.toggle("active");
+
+    // 線更新
+    updateLines();
+
+    // 画面中央にスクロール（レイアウト反映後）
+    requestAnimationFrame(() => {
+      const rect = wrapper.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+
+      window.scrollTo({
+        top: scrollY,
+        behavior: "smooth"
+      });
+    });
+  });
+});
+
+// ==========================
+// 初期化
+// ==========================
+window.addEventListener("DOMContentLoaded", () => {
+  positionNodes();
+  updateLines();
+});
+window.addEventListener("resize", () => {
+  positionNodes();
+  updateLines();
 });

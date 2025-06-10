@@ -11,6 +11,7 @@
       <div class="loading-text">Now Loading...</div>
     </div>
     <div class="content">
+       <!-- 切り替え -->
       <div class="theme-switcher">
         <button id="themeToggleBtn">
           <div class="menu-icon">
@@ -20,27 +21,62 @@
           </div>
         </button>
       </div>
+      <!-- GAMEアイコン -->
+      <div class="gameboy-icon-64">
+        <div class="outer-ring"></div>
+        <div class="screen"></div>
+        <div class="dpad">
+          <div class="vert"></div>
+          <div class="horiz"></div>
+        </div>
+        <div class="button-a"></div>
+        <div class="button-b"></div>
+      </div>
       <div class="icon-area">
         <!-- QuotDictアイコン -->
-        <div class="icon">
+       <div class="icon quotdict-node" id="icon-quotdict">
           <a href="https://quotdict.onrender.com" class="book-icon-open-cover" data-app="QuotDict" data-link="true">
             <div class="book-icon-cover"></div>
           </a>
           <span class="icon-label">QuotDict</span>
         </div>
           <!-- ブラウザアイコン -->
-          <div class="icon">
+          <div class="icon safari-node" id="icon-safari">
             <a href="#" data-app="IntroLog">
               <div class="icon-safari"></div>
             </a>
-            <span class="icon-label icon-label-safari">About</span>
+            <span class="icon-label icon-label-safari">Safari</span>
           </div>
-          <div class="icon">
+          <div class="icon chrome-node" id="icon-chrome">
             <a href="#" data-app="Browser" data-link="true" href="https://example.com">
               <div class="icon-chrome"></div>
             </a>
             <span class="icon-label icon-label-chrome">Chrome</span>
           </div> 
+      </div>
+      <div class="node-wrapper mac-only" data-target="#icon-quotdict">
+        <div class="toggle-content">
+          ■ QuotDict ■ 
+          <br>■ Flask（Python） □ 約2週間（実働10日）  
+          <br>■ コードや引用を保存できるWeb辞書ツール □ 初めてGitHub・Renderで公開しました。
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="node-wrapper mac-only" data-target="#icon-safari">
+        <div class="toggle-content">
+          ■ HP(模擬) ■
+          <br>■ Flask（Python） □ 約//週間（実働//日）  
+          <br>■ // □ //
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="node-wrapper mac-only" data-target="#icon-chrome">
+        <div class="toggle-content">
+          ■ LP(模擬) ■
+          <br>■ Flask（Python） □ 約//週間（実働//日）  
+          <br>■ // □ //
+        </div>
+        <div class="line"></div>
       </div>
       <!-- ウィンドウ風自己紹介 -->
       <div class="window static-window">
@@ -88,15 +124,25 @@
             </div>
           </div>
         </div>
+        <div class="node-wrapper mac-only" id="node-system" data-target=".alert-window">
+          <div class="toggle-content">
+            ■ System Status ■  
+            <br>■ 異常ログ検出中 □ 詳細は下記ログ参照  
+            <br>■ 複数アラートと連携
+          </div>
+          <div class="line" data-source=".warning-a"></div>
+          <div class="line" data-source=".warning-b"></div>
+          <div class="line" data-source=".warning-c"></div>
+        </div>
       </div><!--window static-window-->
     </div><!--content-->
     <div id="log-overlay" class="overlay hidden">
       <div class="log-window" id="log-output">
         <!-- ログがここに追加される -->
       </div>
-      <!-- モーダル内に閉じるボタン入れたければ -->
-<button onclick="closeLog()" style="margin-top: 16px;">閉じる</button>
+       <button onclick="closeLog()" style="margin-top: 16px;">✖</button>
     </div>
+
     <script src="/static/js/script.js"></script>
   </body>
 </html>
