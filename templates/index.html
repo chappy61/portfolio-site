@@ -11,7 +11,9 @@
       <div class="loading-text">Now Loading...</div>
     </div>
     <div class="content">
-       <!-- 切り替え -->
+      <!-- ========================== -->
+      <!-- 切り替え -->
+      <!-- ========================== -->
       <div class="theme-switcher">
         <button id="themeToggleBtn">
           <div class="menu-icon">
@@ -21,39 +23,53 @@
           </div>
         </button>
       </div>
+      <!-- ========================== -->      
       <!-- GAMEアイコン -->
-      <div class="gameboy-icon-64">
-        <div class="outer-ring"></div>
-        <div class="screen"></div>
-        <div class="dpad">
-          <div class="vert"></div>
-          <div class="horiz"></div>
-        </div>
-        <div class="button-a"></div>
-        <div class="button-b"></div>
+      <!-- ========================== -->
+      <div class="game-icon">
+        <a href="#" data-app="IntroLog">
+          <div class="outer-ring"></div>
+          <div class="screen"></div>
+          <div class="dpad">
+            <div class="vert"></div>
+            <div class="horiz"></div>
+          </div>
+          <div class="button-a"></div>
+          <div class="button-b"></div>
+        </a>
       </div>
+
       <div class="icon-area">
+        <!-- ========================== -->
         <!-- QuotDictアイコン -->
-       <div class="icon quotdict-node" id="icon-quotdict">
+        <!-- ========================== -->
+        <div class="icon quotdict-node" id="icon-quotdict">
           <a href="https://quotdict.onrender.com" class="book-icon-open-cover" data-app="QuotDict" data-link="true">
             <div class="book-icon-cover"></div>
           </a>
           <span class="icon-label">QuotDict</span>
         </div>
-          <!-- ブラウザアイコン -->
-          <div class="icon safari-node" id="icon-safari">
-            <a href="#" data-app="IntroLog">
-              <div class="icon-safari"></div>
-            </a>
-            <span class="icon-label icon-label-safari">Safari</span>
-          </div>
-          <div class="icon chrome-node" id="icon-chrome">
-            <a href="#" data-app="Browser" data-link="true" href="https://example.com">
-              <div class="icon-chrome"></div>
-            </a>
-            <span class="icon-label icon-label-chrome">Chrome</span>
-          </div> 
+        <!-- ========================== -->
+        <!-- ブラウザアイコン -->
+        <!-- ========================== -->
+        <!-- Safariアイコン -->
+        <div class="icon safari-node" id="icon-safari">
+          <a href="#" data-app="IntroLog">
+            <div class="icon-safari"></div>
+          </a>
+          <span class="icon-label icon-label-safari">Safari</span>
+        </div>
+        <!-- Chromeアイコン -->
+        <div class="icon chrome-node" id="icon-chrome">
+          <a href="#" data-app="Browser" data-link="true" href="https://example.com">
+            <div class="icon-chrome"></div>
+          </a>
+          <span class="icon-label icon-label-chrome">Chrome</span>
+        </div> 
       </div>
+      <!-- ========================== -->
+      <!-- トグル -->
+      <!-- ========================== -->
       <div class="node-wrapper mac-only" data-target="#icon-quotdict">
         <div class="toggle-content">
           ■ QuotDict ■ 
@@ -77,8 +93,22 @@
           <br>■ // □ //
         </div>
         <div class="line"></div>
+      </div>        
+      <div class="node-wrapper mac-only offset-down" data-target="#warning-c">
+        <div class="toggle-content">
+          ■ System Status ■  
+          <br>■ 異常ログ検出中：Phase-3 Threshold Over  
+          <br>■ 複数アラート連携済 - LayerSync ON  
+          <br>■ DataTrace: Re:Trace[1/∞]  
+          <br>→ ※この情報は演出目的のダミーです
+        </div>
+        <div class="line" data-source=".warning-a"></div>
+        <div class="line" data-source=".warning-b"></div>
+        <div class="line" data-source=".warning-c"></div>
       </div>
+      <!-- ========================== -->
       <!-- ウィンドウ風自己紹介 -->
+      <!-- ========================== -->
       <div class="window static-window">
         <div class="window-header">
           <span class="red"></span>
@@ -94,7 +124,9 @@
             self.vision = <span class="string">"技術で表現する、心地よい世界。"</span>
           </pre>
         </div>
+        <!-- ========================== -->
         <!-- 警告ウィンドウ A -->
+        <!-- ========================== -->
         <div class="alert-window warning-a">
           <button class="close-btn">✖</button>
           <div class="alert-header">[ SYSTEM ERROR ]</div>
@@ -104,7 +136,9 @@
             Status: <span class="blink">CRITICAL</span>
           </div>
         </div>
+        <!-- ========================== -->
         <!-- 警告ウィンドウ B -->
+        <!-- ========================== -->
         <div class="alert-window warning-b">
           <button class="close-btn">✖</button>
           <div class="alert-header">[ PROCESS FAILURE ]</div>
@@ -114,8 +148,10 @@
             Status: <span class="blink">ERROR</span>
           </div>
         </div>
+        <!-- ========================== -->
         <!-- ログ風ウィンドウ -->
-        <div class="alert-window warning-c">
+        <!-- ========================== -->
+        <div class="alert-window warning-c" id="warning-c">
           <button class="close-btn">✖</button>
           <div class="alert-header">[ ANALYSIS LOG ]</div>
           <div class="alert-body">
@@ -123,16 +159,6 @@
               <div class="cursor" id="cursor">▍</div>
             </div>
           </div>
-        </div>
-        <div class="node-wrapper mac-only" id="node-system" data-target=".alert-window">
-          <div class="toggle-content">
-            ■ System Status ■  
-            <br>■ 異常ログ検出中 □ 詳細は下記ログ参照  
-            <br>■ 複数アラートと連携
-          </div>
-          <div class="line" data-source=".warning-a"></div>
-          <div class="line" data-source=".warning-b"></div>
-          <div class="line" data-source=".warning-c"></div>
         </div>
       </div><!--window static-window-->
     </div><!--content-->

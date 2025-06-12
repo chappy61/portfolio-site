@@ -6,7 +6,6 @@ const offset = 30;
 const windowWidth = 350;
 const windowHeight = 200;
 const openedWindows = new Map();
-
 let rotation = 0; // テーマ切り替え用回転制御
 
 // ==========================
@@ -94,51 +93,45 @@ const logLines = [
   ">>> STATUS: Dreaming in Code..."
 ];
 
-async function showLog() {
-  const logContainer = document.getElementById("log-output");
-  const overlay = document.getElementById("log-overlay");
-  logContainer.innerText = "";
-  overlay.classList.remove("hidden");
-
-  for (let line of logLines) {
-    await new Promise(res => setTimeout(res, 500));
-    logContainer.innerText += line + "\n";
-  }
-
-  // カーソル点滅
-  const cursor = document.createElement("span");
-  cursor.textContent = "█";
-  cursor.style.animation = "blink 1s steps(1) infinite";
-  logContainer.appendChild(cursor);
-}
-
-function closeLog() {
-  document.getElementById("log-overlay").classList.add("hidden");
-}
 function showLog() {
   const overlay = document.getElementById("log-overlay");
   const logContainer = document.getElementById("log-output");
-  overlay.classList.remove("hidden");
 
-  // 一旦透明、再描画後にふわっと表示
+  // 初期化
+  overlay.classList.remove("hidden");
+  logContainer.innerText = "";
+
+  // 再描画後にふわっと表示（CSS側で .active にアニメ）
   requestAnimationFrame(() => {
     overlay.classList.add("active");
   });
 
-  logContainer.innerText = "";
-  let cursor = document.createElement("span");
+  // カーソル要素
+  const cursor = document.createElement("span");
   cursor.textContent = "█";
   cursor.classList.add("cursor");
   logContainer.appendChild(cursor);
 
-  // タイピング演出
+  // タイピング風に順に追加
   (async () => {
     for (const line of logLines) {
-      await new Promise(r => setTimeout(r, 600));
+      await new Promise(res => setTimeout(res, 600));
       cursor.before(document.createTextNode(line + "\n"));
     }
   })();
+
+  // クリックで閉じる
+  overlay.addEventListener("click", closeLog, { once: true });
 }
+
+function closeLog() {
+  const overlay = document.getElementById("log-overlay");
+  overlay.classList.remove("active");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+  }, 300); // アニメ完了後に非表示
+}
+
 
 // ==========================
 // ログアニメーション（SIG LOST含む）
@@ -294,20 +287,20 @@ function makeDraggable(el) {
 }
 
 // ==========================
-// 初期化
+// 初期化処理
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const saved = localStorage.getItem("theme") || "win";
-  ThemeManager.setTheme(saved);
+  ThemeManager.setTheme(localStorage.getItem("theme") || "win");
 
   const themeBtn = document.getElementById("themeToggleBtn");
   if (themeBtn) {
-    themeBtn.addEventListener("click", (event) => {
+    themeBtn.addEventListener("click", e => {
       ThemeManager.toggleTheme();
-      createParticles?.(event);
+      createParticles?.(e);
     });
   }
 
+  // アイコンクリックでウィンドウ開く
   document.querySelectorAll(".icon a").forEach(icon => {
     icon.addEventListener("click", e => {
       e.preventDefault();
@@ -329,6 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Chromeアイコン回転アニメーション
   const chromeIcon = document.querySelector(".icon-chrome");
   let chromeRot = 0;
   if (chromeIcon) {
@@ -338,45 +332,75 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // ローディングオーバーレイ
   const overlay = document.getElementById("loading-overlay");
-  if (overlay) {
-    setTimeout(() => overlay.classList.add("fade-out"), 2000);
-  }
+  if (overlay) setTimeout(() => overlay.classList.add("fade-out"), 2000);
 
-  // ログアニメーション開始
-  typeLine();
+  typeLine?.();
 
-  // リロード時のウィンドウ削除
   if (new URLSearchParams(location.search).get("fromApp")) {
     document.querySelectorAll(".dynamic-window").forEach(w => w.remove());
     history.replaceState(null, "", location.pathname);
   }
+
+  // =====================
+  // ノード表示トグル
+  // =====================
+  const icons = document.querySelectorAll('.icon');
+  const nodes = document.querySelectorAll('.node-wrapper.mac-only');
+
+  nodes.forEach(node => {
+    node.addEventListener('click', e => {
+      // アイコンクリックで開く時とバッティングしないように
+      if (e.target.closest('.close-btn')) return;
+
+      node.classList.toggle('active');
+      updateLines();
+    });
+  });
+
+  // ノード内のcloseボタンが動くように（今は無くてもOK）
+  document.querySelectorAll('.node-wrapper .close-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const node = btn.closest('.node-wrapper');
+      if (node) node.classList.remove('active');
+    });
+  });
 });
 
+
 // ==========================
-// ノード位置調整
+// ノード位置調整（右端はみ出し防止付き）
 // ==========================
 function positionNodes() {
   const nodes = document.querySelectorAll(".node-wrapper[data-target]");
   nodes.forEach(wrapper => {
     const targetSelector = wrapper.getAttribute("data-target");
     const target = document.querySelector(targetSelector);
-    if (!target) return;
+    if (!target) {
+      console.error(`Target not found for selector: ${targetSelector}`);
+      return;
+    }
+
     const targetRect = target.getBoundingClientRect();
+    const nodeWidth = wrapper.offsetWidth;
+
+    // 右端からはみ出さないように最大値設定
+    const desiredLeft = targetRect.right + window.scrollX + 15;
+    const maxRight = window.innerWidth + window.scrollX - nodeWidth - 10;
     wrapper.style.position = "absolute";
-    wrapper.style.left = (targetRect.right + window.scrollX + 15) + "px"; // アイコン右端から15pxに変更
+    wrapper.style.left = Math.min(desiredLeft, maxRight) + "px";
+
+    // 垂直はターゲットの中央に合わせる
     wrapper.style.top = (targetRect.top + window.scrollY + (targetRect.height / 2) - (wrapper.offsetHeight / 2)) + "px";
+
+    // 特別な調整例
+    if (targetSelector === "#warning-c") {
+      wrapper.style.top = `${targetRect.top + window.scrollY + 10}px`;
+    }
   });
 }
-
-function delayedPositionNodes() {
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      positionNodes();
-    });
-  });
-}
-
 
 // ==========================
 // 線の描画更新
@@ -386,66 +410,120 @@ function updateLines() {
   nodes.forEach(wrapper => {
     const targetSelector = wrapper.getAttribute("data-target");
     const target = document.querySelector(targetSelector);
-    const line = wrapper.querySelector(".line");
-    if (!target || !line) return;
+    if (!target) {
+      console.error(`Target not found for selector: ${targetSelector}`);
+      return;
+    }
+
+    const lines = wrapper.querySelectorAll(".line");
+    lines.forEach(line => {
+      line.style.width = "0px";
+      line.style.transform = "rotate(0deg)";
+    });
 
     const wrapperRect = wrapper.getBoundingClientRect();
-    const targetRect = target.getBoundingClientRect();
 
-    const wrapperCenterX = wrapper.offsetWidth / 2;
-    const wrapperCenterY = wrapper.offsetHeight / 2;
+    lines.forEach(line => {
+      const sourceSelector = line.getAttribute("data-source");
+      let sourceElem = sourceSelector ? document.querySelector(sourceSelector) : null;
 
-    const dx = (targetRect.left + targetRect.width / 2) - (wrapperRect.left + wrapper.offsetWidth / 2);
-    const dy = (targetRect.top + targetRect.height / 2) - (wrapperRect.top + wrapper.offsetHeight / 2);
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+      const startX = wrapperRect.left + wrapper.offsetWidth / 2;
+      const startY = wrapperRect.top + wrapper.offsetHeight / 2;
 
-    line.style.position = "absolute";
-    line.style.left = wrapperCenterX + "px";
-    line.style.top = wrapperCenterY + "px";
-    line.style.width = distance + "px";
-    line.style.transform = `rotate(${angle}deg)`;
-    line.style.transformOrigin = "left center";
+      let endX, endY;
+      if (sourceElem) {
+        const sourceRect = sourceElem.getBoundingClientRect();
+        endX = sourceRect.left + sourceRect.width / 2;
+        endY = sourceRect.top + sourceRect.height / 2;
+      } else {
+        const targetRect = target.getBoundingClientRect();
+        endX = targetRect.left + targetRect.width / 2;
+        endY = targetRect.top + targetRect.height / 2;
+      }
+
+      const dx = endX - startX;
+      const dy = endY - startY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+      line.style.position = "absolute";
+      line.style.left = `${wrapper.offsetWidth / 2}px`;
+      line.style.top = `${wrapper.offsetHeight / 2}px`;
+      line.style.width = `${distance}px`;
+      line.style.transform = `rotate(${angle}deg)`;
+      line.style.transformOrigin = "left center";
+
+      console.log(`Line updated for ${targetSelector}: distance=${distance}, angle=${angle}`);
+    });
   });
 }
 
 // ==========================
-// ノードのトグル＆中央スクロール
+// 遅延実行で位置調整
 // ==========================
-document.querySelectorAll(".node-wrapper").forEach(wrapper => {
-  wrapper.addEventListener("click", () => {
-    // 他のノードを非アクティブに
-document.querySelectorAll(".node-wrapper").forEach(el => {
-  el.classList.add("visible");
-});
-    // 自分だけトグル
-    wrapper.classList.toggle("active");
-
-    // 線更新
-    updateLines();
-
-    // 画面中央にスクロール（レイアウト反映後）
+function delayedPositionNodes() {
+  requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const rect = wrapper.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      const scrollY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
-
-      window.scrollTo({
-        top: scrollY,
-        behavior: "smooth"
-      });
+      positionNodes();
+      updateLines();
     });
   });
-});
+}
 
 // ==========================
-// 初期化
+// 初期化＋イベント登録
 // ==========================
-window.addEventListener("DOMContentLoaded", () => {
-  positionNodes();
-  updateLines();
-});
-window.addEventListener("resize", () => {
-  positionNodes();
-  updateLines();
+function initNodeUI() {
+  delayedPositionNodes();
+
+  // ノードクリックでトグル表示
+  document.querySelectorAll(".icon").forEach(icon => {
+    icon.addEventListener("click", (e) => {
+      const iconId = icon.id;
+      console.log("Icon clicked:", iconId);
+      const nodeWrapper = document.querySelector(`.node-wrapper[data-target="#${iconId}"]`);
+      if (nodeWrapper) {
+        document.querySelectorAll(".node-wrapper").forEach(el => el.classList.add("visible"));
+        nodeWrapper.classList.toggle("active");
+        updateLines();
+      } else {
+        console.error(`Node wrapper not found for ${iconId}`);
+      }
+    });
+  });
+}
+
+// ==========================
+// DOMイベントの登録
+// ==========================
+document.addEventListener("DOMContentLoaded", initNodeUI);
+window.addEventListener("load", initNodeUI);
+window.addEventListener("resize", delayedPositionNodes);
+
+// ==========================
+// アイコンのクリック処理（リンク遷移）
+// ==========================
+document.querySelectorAll(".icon").forEach(icon => {
+  icon.addEventListener("click", (e) => {
+    e.preventDefault();
+    const iconId = icon.id;
+    const nodeWrapper = document.querySelector(`.node-wrapper[data-target="#${iconId}"]`);
+    if (nodeWrapper) {
+      document.querySelectorAll(".node-wrapper").forEach(el => el.classList.add("visible"));
+      nodeWrapper.classList.toggle("active");
+      updateLines();
+      requestAnimationFrame(() => {
+        const rect = nodeWrapper.getBoundingClientRect();
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const scrollY = rect.top + scrollTop - (window.innerHeight / 2) + (rect.height / 2);
+        window.scrollTo({ top: scrollY, behavior: "smooth" });
+      });
+      const href = icon.querySelector("a")?.getAttribute("href");
+      if (href && icon.querySelector("a")?.dataset.link === "true") {
+        setTimeout(() => {
+          window.location.href = href;
+        }, 3000);
+      }
+    }
+  });
 });

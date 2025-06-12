@@ -187,10 +187,10 @@ body {
   transition: all 1.5s ease-out; /* ふわっと消える */
 }
 /*ゲームアイコン*/ 
-  .gameboy-icon-64 {
+  .game-icon {
    position: fixed;
   top: 150px;
-  right: 90px;
+  right: 100px;
   width: 64px;
   height: 64px;
 }
@@ -198,18 +198,19 @@ body {
 .outer-ring {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 50%;
+  border-radius: 12px; /* ← ここを変更。0でも完全な角張り、12pxなら程よい丸み */
   box-shadow: 0 0 10px rgba(159, 224, 255, 0.7);
-  background: #0d0f11;
+  background: #0d0f11ae;
   z-index: 1;
 }
+
 
 /* 画面 */
 .screen {
   position: absolute;
-  top: 13px;
-  left: 14px;
-  width: 35px;
+  top: 10px;
+  left: 12px;
+  width: 40px;
   height: 25px;
   background: #11161f;
   border-radius: 5px;
@@ -220,8 +221,8 @@ body {
 /* 十字キー */
 .dpad {
   position: absolute;
-  top: 42px;
-  left: 12px;
+  top: 40px;
+  left: 9px;
   width: 16px;
   height: 16px;
   z-index: 3;
@@ -276,7 +277,7 @@ body {
   50% { transform: rotate(3deg); }
 }
 
-.gameboy-icon-64:hover {
+.game-icon:hover {
   animation: sway 1.5s ease-in-out infinite;
 }
 
@@ -819,72 +820,86 @@ body {
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* ここから.mac-themeだけに追加 */
-/* 画面全体に薄い白スモーク＋ぼかしオーバーレイ */
+/* Macテーマ専用スタイル */
 .mac-theme .overlay,
 .mac-theme .window,
 .mac-theme .icon-area {
   pointer-events: none; /* クリック無効 */
 }
 
+/* Macテーマのオーバーレイ（白スモーク＋ぼかし） */
 .mac-theme::after,
 .mac-theme .window::after,
 .mac-theme .alert-window::after {
   content: "";
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(2px);
   pointer-events: none;
   z-index: 5;
 }
-/* Macテーマ専用ノード */
+
+/* Macテーマ専用ノード（表示制御） */
 .mac-only {
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease;
+  pointer-events: none; /* ← 追加する */
 }
 .mac-theme .mac-only {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto; /* ← 追加する */
 }
 
-/* ノードラッパー配置調整（位置は仮） */
+/* ノードラッパーの基本スタイル */
 .node-wrapper {
   position: relative;
-  width: 20px;   /* ノードの見た目サイズ */
+  width: 20px;
   height: 20px;
   z-index: 1000;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.2); /* 見やすくするため仮の色 */
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
- z-index: 1000;
-   opacity: 0;
-  transition: opacity 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
+.node-wrapper.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .node-wrapper.visible {
   opacity: 1;
+}
+.node-circle {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  z-index: 100;
 }
 .node-wrapper.active .info-node {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
   pointer-events: auto;
 }
+
 .node-wrapper:hover .line {
   background: rgba(255, 255, 255, 0.3);
   box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
-.quotdict-node,
-.safari-node,
-.chrome-node {
-  position: relative;
-}
-
-/*  ノード囲い：Macのみ表示 */
+/* ノードの囲い（Macテーマ専用） */
 .mac-theme .quotdict-node::before,
 .mac-theme .safari-node::before,
 .mac-theme .chrome-node::before {
@@ -894,63 +909,67 @@ body {
   left: 0px;
   width: calc(90% + 5px);
   height: calc(70% + 10px);
-  border: 1px solid rgba(255, 255, 255, 0.6); /* ぼかしなしクッキリ線 */
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   pointer-events: none;
   z-index: 10;
 }
 
+/* Winテーマでの非表示設定 */
+.win-theme .quotdict-node::before,
+.win-theme .safari-node::before,
+.win-theme .chrome-node::before {
+  content: none;
+}
+
+/* ノードのコンテンツ */
 .node-content {
   background: white;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-}
-
-.node-wrapper.active .toggle-content {
-  display: block;
-  opacity: 1;
-  transform: translateX(0);
-  pointer-events: auto;
-}
-
-
-/* Winテーマでは表示させない */
-.win-theme .quotdict-node::before {
-  content: none;
 }
 
 /* トグルコンテンツ */
 .toggle-content {
   position: absolute;
-  top: 50%;                /* ノードの縦中央を基準に */
-  left: calc(100% + 10px); /* ノードの右端から10px右に */
-  transform: translateY(-50%) translateY(-20px); /* 初期位置を上に20pxずらし、縦中央を維持 */
-  background: rgba(11, 11, 27, 0.748);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 10px 100px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: white;
+  top: 50%;               /* 親の高さの中央に */
+  left: 100%;             /* 親の右端にピタッと */
+  transform: translate(10px, -50%); /* 右に少し余裕を空けて上下中央揃え */
+  margin-top: 0;          /* もう margin-top は不要 */
+  width: 600px;
+  max-width: 90vw;
+  white-space: normal;
+  word-break: break-word;
+  background-color: var(--bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1em;
+  font-size: 0.9em;
+  color: var(--text-color);
   backdrop-filter: blur(4px);
-  box-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
-  text-align: left;
-  width: max-content;
+  box-shadow: 0 0 8px rgba(62, 203, 203, 0.435);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  white-space: nowrap;
-  z-index: 10;
-  line-height: 1.6;
-  
+  transition: opacity 0.5s ease;
 }
-
-/* アクティブ時 */
+.offset-down {
+  transform: translateY(20px); /* 数値はお好みで */
+}
+/* アクティブ時に表示 */
 .node-wrapper.active .toggle-content {
   opacity: 1;
-  transform: translateY(-50%) translateX(0); /* アクティブ時に縦中央に移動（上からフェードイン） */
   pointer-events: auto;
+  display: block; /* display:blockは維持 */
+}
+
+
+.node-wrapper .toggle-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
 /* ノードとアイコンをつなぐ線 */
@@ -959,8 +978,8 @@ body {
   top: 5%;
   left: 30%;
   height: 2px;
-  background: rgba(255, 255, 255, 0.4); /* 儚げに */
+  background: rgba(255, 255, 255, 0.172);
   opacity: 0.8;
   pointer-events: none;
+  z-index: 1;
 }
-
