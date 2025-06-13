@@ -2,13 +2,16 @@
 /* ページ全体の基本レイアウトとスタイル */
 body {
   margin: 0;
-  font-family: 'Courier New', monospace, system-ui, sans-serif; /* フォントスタック */
-  height: 100vh; /* ビューポートの高さに合わせる */
-  overflow: hidden; /* スクロールバーを非表示 */
+  font-family: 'Courier New', monospace, system-ui, sans-serif;
+  height: 100vh;
+  overflow: hidden;
   position: relative;
-  padding: 2rem; /* 内側の余白 */
-  background-color: var(--bg-color); /* テーマに応じた背景色 */
-  color: var(--text-color); /* テーマに応じた文字色 */
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 /* ページ読み込み時のオーバーレイ */
@@ -72,7 +75,6 @@ body {
   pointer-events: none;
 }
 
-
 .hidden {
   display: none;
 }
@@ -93,7 +95,6 @@ body {
   overflow-y: auto;
   scrollbar-width: thin;
 }
-
 
 .modal {
   background: rgba(255, 255, 255, 0.85);
@@ -186,112 +187,109 @@ body {
   opacity: 1;
   transition: all 1.5s ease-out; /* ふわっと消える */
 }
-/*ゲームアイコン*/ 
-  .game-icon {
-   position: fixed;
-  top: 150px;
-  right: 100px;
+/* game-iconの専用スタイル */
+.game-icon-specific {
+  position: fixed !important;
+  right: 90px !important;
+  top: 20%;
   width: 64px;
   height: 64px;
+  background-color: #333;
+  border: 2px solid #888;
+  border-radius: 8px; /* ← 四角にする！ */
+  position: relative;
+  box-shadow: 0 0 6px rgba(100, 200, 255, 0.3);
 }
 
-.outer-ring {
+.game-icon-specific .screen {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  border-radius: 12px; /* ← ここを変更。0でも完全な角張り、12pxなら程よい丸み */
-  box-shadow: 0 0 10px rgba(159, 224, 255, 0.7);
-  background: #0d0f11ae;
-  z-index: 1;
+  top: 12px;
+  left: -2px;
+  width: 48px;
+  height: 28px;
+  background-color: #111;
+  border: 2px solid #5af;
+  border-radius: 0;
+  box-shadow: inset 0 0 4px rgba(90, 200, 255, 0.4);
 }
 
-
-/* 画面 */
-.screen {
+.game-icon-specific .dpad {
   position: absolute;
-  top: 10px;
-  left: 12px;
-  width: 40px;
-  height: 25px;
-  background: #11161f;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(159, 224, 255, 0.5) inset;
-  z-index: 2;
-}
-
-/* 十字キー */
-.dpad {
-  position: absolute;
-  top: 40px;
-  left: 9px;
+  top: 60px;
+  left: -5px;
   width: 16px;
   height: 16px;
   z-index: 3;
 }
-.dpad .vert, .dpad .horiz {
+
+.game-icon-specific .dpad .vert,
+.game-icon-specific .dpad .horiz {
   position: absolute;
   background: #9fe0ff;
   box-shadow: 0 0 6px rgba(159, 224, 255, 0.8);
   border-radius: 1.5px;
   opacity: 0.85;
 }
-.dpad .vert {
+
+.game-icon-specific .dpad .vert {
   left: 7px;
   top: 0;
   width: 2.5px;
   height: 16px;
 }
-.dpad .horiz {
+
+.game-icon-specific .dpad .horiz {
   top: 7px;
   left: 0;
   width: 16px;
   height: 2.5px;
 }
 
-/* ボタン */
-.button-a {
+.game-icon-specific .button-a {
   position: absolute;
-  top: 46px;
-  right: 23px;
-  width: 6px;
-  height: 6px;
+  top: 65px;
+  right: 15px;
+  width: 8px;
+  height: 8px;
   background: #9fe0ff;
   box-shadow: 0 0 8px rgba(159, 224, 255, 0.9);
   border-radius: 50%;
   opacity: 0.85;
   z-index: 3;
 }
-.button-b {
+
+.game-icon-specific .button-b {
   position: absolute;
-  top: 46px;
-  right: 10px;
-  width: 6px;
-  height: 6px;
+  top: 65px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
   background: #9fe0ff;
   box-shadow: 0 0 8px rgba(159, 224, 255, 0.9);
   border-radius: 50%;
   opacity: 0.85;
   z-index: 3;
 }
-@keyframes sway {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(3deg); }
+
+.game-icon-specific:hover {
+  transform: scale(0.5);
 }
-
-.game-icon:hover {
-  animation: sway 1.5s ease-in-out infinite;
+.game-icon-specific:hover .screen {
+  background-color: #1c2f40;
+  box-shadow:
+    inset 0 0 8px rgba(90, 200, 255, 0.8),
+    0 0 8px rgba(90, 200, 255, 0.4),
+    0 0 12px rgba(90, 200, 255, 0.2);
 }
-
-
-
 /* アイコンエリアの配置 */
 .icon-area {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
   top: 20px;
   left: 20px;
-  display: flex;
-  flex-direction: column; /* 縦に並べる */
 }
-
 /* 個々のアイコンのスタイル */
 .icon {
   display: flex;
@@ -302,8 +300,9 @@ body {
   height: 90px;
   margin: 8px;
   text-align: center;
-  user-select: none; /* テキスト選択不可 */
+  user-select: none;
   position: relative;
+  z-index: 15; /* 警告ウィンドウより手前 */
 }
 
 .icon > a {
@@ -508,7 +507,7 @@ body {
   left: 100px;
   transform: translate(-50%, -50%);
   width: 900px; /* メインウィンドウのサイズ */
-  height: 480px;
+  height: 500px;
   max-width: 100%;
   overflow: visible;
   border-radius: 12px;
@@ -533,7 +532,6 @@ body {
   align-items: center;
   padding: 5px 10px;
   gap: 8px;
-  cursor: move; /* ドラッグ可能 */
   border-bottom: 1px solid var(--accent-color);
   background-color: var(--header-bg);
   border-top-left-radius: 12px;
@@ -545,7 +543,6 @@ body {
   display: inline-block;
   width: 14px;
   height: 14px;
-  cursor: pointer;
 }
 
 /* ウィンドウ本文のスタイル */
@@ -558,7 +555,6 @@ body {
   font-size: 18px;
   line-height: 1.4;
   white-space: pre-wrap;
-  overflow-y: auto; /* スクロール可能 */
   height: calc(100% - 40px); /* ヘッダー分を除く */
   font-family: 'Courier New', monospace;
   color: var(--text-color);
@@ -603,48 +599,6 @@ body {
   to { opacity: 1; }
 }
 
-/* Mac風ローディングバー */
-.loading-bar-mac {
-  width: 60%;
-  margin: 0 auto;
-  height: 6px;
-  background: linear-gradient(90deg, #ccc 25%, #eee 50%, #ccc 75%);
-  background-size: 200% 100%;
-  animation: macLoad 1.5s linear infinite;
-  border-radius: 3px;
-}
-
-@keyframes macLoad {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
-}
-
-/* Windows風ローディングバー */
-.loading-bar-win {
-  width: 60%;
-  margin: 0 auto;
-  height: 6px;
-  background-color: #333;
-  position: relative;
-  overflow: hidden;
-  border-radius: 3px;
-}
-
-.loading-bar-win::before {
-  content: "";
-  position: absolute;
-  left: -40%;
-  width: 40%;
-  height: 100%;
-  background-color: #00bfff; /* 水色 */
-  animation: winLoad 1s ease-in-out infinite;
-}
-
-@keyframes winLoad {
-  0% { left: -40%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
-}
 
 /* win-theme と mac-theme 共通の基本スタイル */
 .win-theme,
@@ -715,7 +669,7 @@ body {
 .win-theme .alert-window,
 .mac-theme .alert-window {
   position: absolute;
-  width: 200px;
+  width: 250px;
   background: rgba(0, 0, 0, 0.7); /* 半透明 */
   border: 1px solid #aaa;
   color: #ccc;
@@ -731,7 +685,7 @@ body {
 
 .win-theme .alert-body,
 .mac-theme .alert-body {
-  height: 100%;
+  height: 120%;
   overflow: hidden;
 }
 
@@ -743,15 +697,15 @@ body {
 /* 警告ウィンドウの位置と回転 */
 .win-theme .warning-a,
 .mac-theme .warning-a {
-  bottom: 4rem;
-  right: -5rem;
+  bottom: 5rem;
+  right: -12rem;
   transform: rotate(-2deg);
 }
 
 .win-theme .warning-b,
 .mac-theme .warning-b {
   bottom: -3rem;
-  right: 3.5rem;
+  right: -2rem;
   transform: rotate(2deg);
   z-index: 9;
 }
@@ -822,9 +776,21 @@ body {
 
 /* Macテーマ専用スタイル */
 .mac-theme .overlay,
-.mac-theme .window,
-.mac-theme .icon-area {
+.mac-theme .window {
   pointer-events: none; /* クリック無効 */
+}
+/* Macテーマ時だけ .icon-area を無効化 */
+.mac-theme .icon-area,
+.mac-theme .icon,
+.mac-theme .game-icon-specific {
+  pointer-events: none; /* 説明モードでクリック不可 */
+}
+
+/* モード切替の制御 */
+.win-theme .icon-area,
+.win-theme .icon,
+.win-theme .game-icon-specific {
+  pointer-events: auto; /* メインモードでクリック可能 */
 }
 
 /* Macテーマのオーバーレイ（白スモーク＋ぼかし） */
@@ -853,9 +819,8 @@ body {
 .mac-theme .mac-only {
   visibility: visible;
   opacity: 1;
-  pointer-events: auto; /* ← 追加する */
+  pointer-events: auto; /* ノードはクリック可能 */
 }
-
 /* ノードラッパーの基本スタイル */
 .node-wrapper {
   position: relative;
@@ -955,7 +920,16 @@ body {
   transition: opacity 0.5s ease;
 }
 .offset-down {
-  transform: translateY(20px); /* 数値はお好みで */
+  transform: translateY(50px); /* 数値はお好みで */
+}
+.left-node {
+  transform: translateX(-100%) translateY(0); /* ← 左に押し出す */
+  text-align: right; /* 中身も右寄せでバランス取る */
+}
+.left-node .line {
+  left: auto;
+  right: -1px; /* 線の起点も右端から出す */
+  transform-origin: top right;
 }
 /* アクティブ時に表示 */
 .node-wrapper.active .toggle-content {
@@ -963,7 +937,6 @@ body {
   pointer-events: auto;
   display: block; /* display:blockは維持 */
 }
-
 
 .node-wrapper .toggle-content {
   display: none;
@@ -982,4 +955,12 @@ body {
   opacity: 0.8;
   pointer-events: none;
   z-index: 1;
+}
+/* 非アクティブ状態 */
+.icon.inactive,
+.game-icon-specific.inactive {
+  pointer-events: none;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  transition: opacity 0.3s, filter 0.3s;
 }

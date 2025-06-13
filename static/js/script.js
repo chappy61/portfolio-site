@@ -6,7 +6,6 @@ const offset = 30;
 const windowWidth = 350;
 const windowHeight = 200;
 const openedWindows = new Map();
-let rotation = 0; // テーマ切り替え用回転制御
 
 // ==========================
 // テーマ管理・切り替え処理
@@ -25,17 +24,24 @@ const ThemeManager = {
     delayedPositionNodes();
   },
 
-toggleTheme() {
-  const newTheme = this.currentTheme === "mac" ? "win" : "mac";
-  this.setTheme(newTheme);
+  toggleTheme() {
+    const newTheme = this.currentTheme === "mac" ? "win" : "mac";
+    this.setTheme(newTheme);
 
-  rotation += 180;
-  const star = document.querySelector(".star-outline");
-  if (star) {
-    star.style.transform = `rotate(${rotation}deg)`;
-  }
-},
-
+    // 🎯 ノード説明モードの切り替え
+    if (newTheme === "mac") {
+      // 説明モードに入る
+      document.body.classList.add("explain-mode");
+      document.querySelectorAll('.node-wrapper').forEach(n => n.classList.add('visible'));
+      document.querySelectorAll('.icon, .game-icon').forEach(icon => icon.classList.add('inactive'));
+      updateLines(); // ←線の再描画（必要に応じて）
+    } else {
+      // 通常モードに戻る
+      document.body.classList.remove("explain-mode");
+      document.querySelectorAll('.node-wrapper').forEach(n => n.classList.remove('visible', 'active'));
+      document.querySelectorAll('.icon, .game-icon').forEach(icon => icon.classList.remove('inactive'));
+    }
+  },
 
   updateButtonGlow() {
     const btn = document.getElementById("themeToggleBtn");
@@ -85,12 +91,16 @@ function createParticles(event) {
 // 自己紹介
 // ==========================
 const logLines = [
-  ">>> SYSTEM INITIALIZED",
-  ">>> USER IDENTIFIED: \"あなたの名前\"",
-  ">>> PROFILE LOADED",
-  ">>> ROLE: Frontend Developer / Designer",
-  ">>> CURRENT PROJECT: Portfolio Interface v1.0",
-  ">>> STATUS: Dreaming in Code..."
+  ">>> システム初期化完了",
+  ">>> ユーザー確認: 『 下川 美弥 』",
+  ">>> プロファイル読込完了",
+  ">>> ロール: フロントエンドエンジニア / UIデザイナー",
+  ">>> 主な使用技術: HTML, CSS, JavaScript, React, Figma",
+  ">>> 特性: インタラクション重視 / 情緒的UI設計",
+  ">>> 最近の取り組み: ノードUI + 粒子表現 + ウィンドウUI",
+  ">>> 現在の作業: Portfolio Interface v1.0",
+  ">>> モード: 自己紹介ログ（REPORT MODE）",
+  ">>> 状態: 静かに、コードの夢を見ています"
 ];
 
 function showLog() {
@@ -192,101 +202,6 @@ function restartTyping() {
 }
 
 // ==========================
-// ウィンドウ生成・管理
-// ==========================
-function createWindow(app, url) {
-  const windowEl = document.createElement("div");
-  windowEl.classList.add("window", "dynamic-window");
-
-  const left = (window.innerWidth - windowWidth) / 2;
-  const top = (window.innerHeight - windowHeight) / 2;
-
-  Object.assign(windowEl.style, {
-    left: `${left}px`,
-    top: `${top}px`,
-    zIndex: ++zIndex,
-    opacity: "0",
-    transform: "scale(0.8)",
-    transition: "all 0.3s ease"
-  });
-
-  let bodyContent = `
-    <pre><code>
-<span class="keyword">class</span> <span class="class">Me</span>:
-    <span class="keyword">def</span> <span class="prop">__init__</span>(self):
-        self.name = <span class="string">"${app}"</span>
-        self.from_ = <span class="string">"日本"</span>
-        self.skills = [<span class="string">"Python"</span>, <span class="string">"Flask"</span>, <span class="string">"CSS"</span>]
-        self.vision = <span class="string">"技術で表現する、心地よい世界。"</span>
-    </code></pre>
-  `;
-
-  if (url) {
-    const themeClass = document.body.classList.contains("mac-theme") ? "loading-bar-mac" : "loading-bar-win";
-    bodyContent = `
-      <div class="loading-bar-container">
-        <p class="loading-text">Now Loading...</p>
-        <div class="${themeClass}"></div>
-      </div>
-    `;
-    setTimeout(() => {
-      window.location.href = `${url}?fromApp=true`;
-    }, 3000);
-  }
-
-  windowEl.innerHTML = `
-    <div class="window-header">
-      <span class="red close-btn"></span>
-      <span class="yellow"></span>
-      <span class="green"></span>
-    </div>
-    <div class="window-body">${bodyContent}</div>
-  `;
-
-  document.body.appendChild(windowEl);
-  makeDraggable(windowEl);
-
-  requestAnimationFrame(() => {
-    windowEl.style.opacity = "1";
-    windowEl.style.transform = "scale(1)";
-  });
-
-  windowEl.querySelector(".close-btn").addEventListener("click", () => {
-    windowEl.remove();
-    openedWindows.delete(app);
-  });
-
-  return windowEl;
-}
-
-// ==========================
-// ドラッグ処理
-// ==========================
-function makeDraggable(el) {
-  const header = el.querySelector(".window-header");
-  let isDragging = false;
-  let offsetX, offsetY;
-
-  header.addEventListener("mousedown", (e) => {
-    isDragging = true;
-    el.style.zIndex = zIndex++;
-    offsetX = e.clientX - el.offsetLeft;
-    offsetY = e.clientY - el.offsetTop;
-  });
-
-  document.addEventListener("mousemove", (e) => {
-    if (isDragging) {
-      el.style.left = `${e.clientX - offsetX}px`;
-      el.style.top = `${e.clientY - offsetY}px`;
-    }
-  });
-
-  document.addEventListener("mouseup", () => {
-    isDragging = false;
-  });
-}
-
-// ==========================
 // 初期化処理
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
@@ -299,28 +214,6 @@ document.addEventListener("DOMContentLoaded", () => {
       createParticles?.(e);
     });
   }
-
-  // アイコンクリックでウィンドウ開く
-  document.querySelectorAll(".icon a").forEach(icon => {
-    icon.addEventListener("click", e => {
-      e.preventDefault();
-      const app = icon.dataset.app;
-      const href = icon.getAttribute("href");
-      const isLink = icon.dataset.link === "true";
-
-      const opened = openedWindows.get(app);
-      if (opened) {
-        let left = parseInt(opened.style.left) + offset;
-        let top = parseInt(opened.style.top) + offset;
-        if (left + windowWidth > window.innerWidth) left = 100;
-        if (top + windowHeight > window.innerHeight) top = 100;
-        Object.assign(opened.style, { left: `${left}px`, top: `${top}px`, zIndex: ++zIndex });
-      } else {
-        const newWin = createWindow(app, isLink ? href : null);
-        openedWindows.set(app, newWin);
-      }
-    });
-  });
 
   // Chromeアイコン回転アニメーション
   const chromeIcon = document.querySelector(".icon-chrome");
@@ -346,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // =====================
   // ノード表示トグル
   // =====================
-  const icons = document.querySelectorAll('.icon');
+  const icons = document.querySelectorAll('.icon, .game-icon');
   const nodes = document.querySelectorAll('.node-wrapper.mac-only');
 
   nodes.forEach(node => {
@@ -359,7 +252,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ノード内のcloseボタンが動くように（今は無くてもOK）
+  // ノード内のcloseボタンが動くように
   document.querySelectorAll('.node-wrapper .close-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       e.stopPropagation();
@@ -368,10 +261,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-
-
 // ==========================
-// ノード位置調整（右端はみ出し防止付き）
+// ノード位置調整
 // ==========================
 function positionNodes() {
   const nodes = document.querySelectorAll(".node-wrapper[data-target]");
@@ -477,7 +368,7 @@ function initNodeUI() {
   delayedPositionNodes();
 
   // ノードクリックでトグル表示
-  document.querySelectorAll(".icon").forEach(icon => {
+  document.querySelectorAll(".icon, .game-icon").forEach(icon => {
     icon.addEventListener("click", (e) => {
       const iconId = icon.id;
       console.log("Icon clicked:", iconId);
@@ -503,7 +394,7 @@ window.addEventListener("resize", delayedPositionNodes);
 // ==========================
 // アイコンのクリック処理（リンク遷移）
 // ==========================
-document.querySelectorAll(".icon").forEach(icon => {
+document.querySelectorAll(".icon, .game-icon").forEach(icon => {
   icon.addEventListener("click", (e) => {
     e.preventDefault();
     const iconId = icon.id;
