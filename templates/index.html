@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <link rel="stylesheet" href="/static/css/icon.css" />
+    <link rel="stylesheet" href="/static/css/window.css" />
+    <link rel="stylesheet" href="/static/css/mac-theme.css" />
   </head>
   <body class="win-theme">
     <div id="loading-overlay">
@@ -59,6 +62,13 @@
           <div class="button-b"></div>
         </a>
       </div>
+<div class="steam-icon">
+  <div class="circle big"></div>
+  <div class="circle small-left"></div>
+  <div class="circle small-right"></div>
+  <div class="connector"></div>
+</div>
+
       <!-- ========================== -->
       <!-- トグル -->
       <!-- ========================== -->
@@ -111,18 +121,15 @@
       <!-- ========================== -->
       <div class="window static-window">
         <div class="window-header">
-          <span class="red"></span>
-          <span class="yellow"></span>
-          <span class="green"></span>
+          <div class="system-controls">
+            <button class="system-btn override-btn" data-tooltip="早送り">OVERRIDE »</button>
+            <button class="system-btn reboot-btn" data-tooltip="最初から">REBOOT</button>
+            <button class="system-btn shutdown-btn" data-tooltip="全文表示">FORCE DUMP</button>
+          </div>
+          <span class="log-close">✖</span>
         </div>
-        <div class="window-body">
-          <pre>
-            <span class="keyword">class</span> <span class="class">Me</span>:
-            <span class="keyword">def</span> <span class="prop">__init__</span>(self):
-            self.name = <span class="string"><button class="open-log" onclick="showLog()">自己紹介を見る</button></span>
-            self.skills = [<span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"HTML5"</span>]
-            self.vision = <span class="string">"技術で表現する、心地よい世界。"</span>
-          </pre>
+        <div id="boot-screen" class="boot-screen">
+          <pre class="boot-log"></pre>
         </div>
         <!-- ========================== -->
         <!-- 警告ウィンドウ A -->
@@ -161,14 +168,12 @@
           </div>
         </div>
       </div><!--window static-window-->
-    </div><!--content-->
-    <div id="log-overlay" class="overlay hidden">
-      <div class="log-window" id="log-output">
-        <!-- ログがここに追加される -->
+      <!-- 自己紹介ログのオーバーレイ ウィンドウ内に入れない-->
+      <div id="log-overlay" class="hidden">
+        <div id="profile-title">My Profile</div>
+        <pre id="log-output"></pre>
       </div>
-       <button onclick="closeLog()" style="margin-top: 16px;">✖</button>
-    </div>
-
+    </div><!--content-->
     <script src="/static/js/script.js"></script>
   </body>
 </html>

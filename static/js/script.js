@@ -88,11 +88,152 @@ function createParticles(event) {
   }
 }
 // ==========================
+// 起動ログメッセージ
+// ==========================
+const bootLines = [
+  "[BOOT] Portfolio Virtual OS v1.02 initializing.....          ■ :: SYSTEM MONITOR",
+  "[INFO] Loading modules: UI / Particles / LogSystem          CPU : █████░░░ 48%",
+  "[ OK ] Time Sync: 2025.06.16 21:12:04 JST                Memory : ██████░░ 64%",
+  "[ OK ] Visual Interface: win-theme.engaged                 Mode : WIN-THEME",
+  "[INFO] Injecting personality core... success.            Status : ACTIVE",
+  "[INFO] Scanning identity parameters...                   Target : /User/Portfolio",
+  "[ OK ] Language: Japanese                                  Auth : Local",
+  "[WARN] Identity signature is ambiguous               Confidence : 72.4%",
+  "[ OK ] Class: Human                                   Alignment : Chaotic Good",
+  "[ OK ] Type: Designer / Engineer / Dreamer                 Role : Self-taught",
+  "[.SYS] Hashing experiences...                             Count : 47 fragments",
+  "[ OK ] Affinity: Minimal UI / Particle Systems / Motion Design",
+  "[INFO] Installing emotional layers...                     Style : 感覚 × 技術",
+  "[ OK ] Vision: '技術で表現する、心地よい世界。'",
+  "[.SYS] Writing to memory: Me()",
+  "[READY] <span class='command'>profile.run()</span>",
+  "",
+];
+
+// ==========================
+// 変数管理
+// ==========================
+let currentLine = 0;
+let currentChar = 0;
+let isFastForward = false;
+let typingInterrupted = false;
+
+const TYPE_SPEED = 40;
+const LINE_DELAY = 300;
+
+const bootLogEl = document.querySelector('.boot-log');
+const overrideBtn = document.querySelector('.override-btn');
+const rebootBtn = document.querySelector('.reboot-btn');
+const shutdownBtn = document.querySelector('.shutdown-btn');
+
+// ==========================
+// タイピング処理
+// ==========================
+function typeNextChar() {
+  if (typingInterrupted) return;
+
+  // 最終行到達
+  if (currentLine >= bootLines.length) {
+    const lines = bootLogEl.querySelectorAll('div');
+    const targetLineIndex = bootLines.length - 2;
+    const updatedLine = `[READY] <span class="command">profile.run()</span> → <a href="#profile" class="profile-link">VIEW PROFILE</a>`;
+    if (lines[targetLineIndex]) {
+      lines[targetLineIndex].innerHTML = updatedLine;
+    }
+
+    const profileLink = bootLogEl.querySelector('.profile-link');
+    setTimeout(() => {
+      profileLink.classList.add('visible');
+    }, 500);
+    return;
+  }
+
+  const line = bootLines[currentLine];
+  if (currentChar === 0) {
+    const div = document.createElement('div');
+    bootLogEl.appendChild(div);
+  }
+
+  const lineEl = bootLogEl.lastElementChild;
+  lineEl.innerHTML += line[currentChar];
+  currentChar++;
+
+  const speed = isFastForward ? 5 : TYPE_SPEED;
+  if (currentChar < line.length) {
+    setTimeout(typeNextChar, speed);
+  } else {
+    currentLine++;
+    currentChar = 0;
+    const delay = isFastForward ? 20 : LINE_DELAY;
+    setTimeout(typeNextChar, delay);
+  }
+}
+
+// ==========================
+// 起動時スタート
+// ==========================
+window.addEventListener('load', () => {
+  typeNextChar();
+});
+
+// ==========================
+// OVERRIDE（早送り）
+// ==========================
+overrideBtn.addEventListener('click', () => {
+  isFastForward = !isFastForward;
+  overrideBtn.style.color = isFastForward ? '#e33e3e' : '#bbb';
+});
+
+// ==========================
+// REBOOT（やり直し）
+// ==========================
+rebootBtn.addEventListener('click', () => {
+  // 状態リセット
+  currentLine = 0;
+  currentChar = 0;
+  isFastForward = false;
+  typingInterrupted = false;
+
+  // 表示クリア
+  bootLogEl.innerHTML = '';
+  bootLogEl.scrollTop = 0;
+  overrideBtn.style.color = '#bbb';
+  bootLogEl.classList.remove('shutdown-mode');
+
+  // 再スタート
+  typeNextChar();
+});
+
+// ==========================
+// SHUTDOWN（全文表示）
+// ==========================
+shutdownBtn.addEventListener('click', () => {
+  typingInterrupted = true; // ← タイピングを中断
+  bootLogEl.innerHTML = ''; // ← 表示クリア
+
+  // 各行を <div> にして構築
+  const logLinesHTML = bootLines.map(line => `<div>${line}</div>`);
+
+  // 最後の行を差し替え
+  const updatedLine = `<div>[READY] <span class="command">profile.run()</span> → <a href="#profile" class="profile-link">VIEW PROFILE</a></div>`;
+  logLinesHTML[bootLines.length - 2] = updatedLine;
+
+  bootLogEl.innerHTML = logLinesHTML.join('');
+
+  const profileLink = bootLogEl.querySelector('.profile-link');
+  setTimeout(() => {
+    profileLink.classList.add('visible');
+  }, 500);
+});
+
+// ==========================
 // 自己紹介
 // ==========================
 const logLines = [
-  ">>> システム初期化完了",
-  ">>> ユーザー確認: 『 下川 美弥 』",
+  ">>> initializing...",
+  ">>> system booting sequence start",
+  ">>> establishing neural link...",
+  ">>> ユーザー確認: 『 下 川  美 弥 』",
   ">>> プロファイル読込完了",
   ">>> ロール: フロントエンドエンジニア / UIデザイナー",
   ">>> 主な使用技術: HTML, CSS, JavaScript, React, Figma",
@@ -100,8 +241,13 @@ const logLines = [
   ">>> 最近の取り組み: ノードUI + 粒子表現 + ウィンドウUI",
   ">>> 現在の作業: Portfolio Interface v1.0",
   ">>> モード: 自己紹介ログ（REPORT MODE）",
-  ">>> 状態: 静かに、コードの夢を見ています"
+  ">>> 状態: 静かに、コードの夢を見ています",
+  ">>> LOG END",
+  ">>> システムはスリープ状態に入りました",
+  ">>> 何かをクリックすると再起動します...",
+  ""
 ];
+
 
 function showLog() {
   const overlay = document.getElementById("log-overlay");
@@ -139,8 +285,18 @@ function closeLog() {
   overlay.classList.remove("active");
   setTimeout(() => {
     overlay.classList.add("hidden");
-  }, 300); // アニメ完了後に非表示
+  }, 300);
 }
+
+// ✅ Bootスクリーンをクリックしたら showLog を呼び出すようにする！
+const bootScreen = document.getElementById("boot-screen");
+
+bootScreen.addEventListener("click", () => {
+  const overlay = document.getElementById("log-overlay");
+  if (!overlay.classList.contains("active")) {
+    showLog();
+  }
+});
 
 
 // ==========================
@@ -277,21 +433,31 @@ function positionNodes() {
     const targetRect = target.getBoundingClientRect();
     const nodeWidth = wrapper.offsetWidth;
 
-    // 右端からはみ出さないように最大値設定
-    const desiredLeft = targetRect.right + window.scrollX + 15;
+    // 基本位置：ターゲットの右側
+    let desiredLeft = targetRect.right + window.scrollX + 15;
+
+    // left-nodeなら左側に表示する
+    if (wrapper.classList.contains('left-node')) {
+      desiredLeft = targetRect.left + window.scrollX - nodeWidth - 15;
+    }
+
     const maxRight = window.innerWidth + window.scrollX - nodeWidth - 10;
+
     wrapper.style.position = "absolute";
     wrapper.style.left = Math.min(desiredLeft, maxRight) + "px";
 
-    // 垂直はターゲットの中央に合わせる
-    wrapper.style.top = (targetRect.top + window.scrollY + (targetRect.height / 2) - (wrapper.offsetHeight / 2)) + "px";
+    // 垂直中央に合わせる
+    wrapper.style.top = (
+      targetRect.top + window.scrollY + targetRect.height / 2 - wrapper.offsetHeight / 2
+    ) + "px";
 
-    // 特別な調整例
+    // 特別な調整例（任意）
     if (targetSelector === "#warning-c") {
       wrapper.style.top = `${targetRect.top + window.scrollY + 10}px`;
     }
   });
 }
+
 
 // ==========================
 // 線の描画更新
