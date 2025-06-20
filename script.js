@@ -8,6 +8,25 @@ const windowHeight = 200;
 const openedWindows = new Map();
 
 // ==========================
+// ランドスケープ
+// ==========================
+window.addEventListener("orientationchange", checkOrientation);
+window.addEventListener("resize", checkOrientation);
+
+function checkOrientation() {
+  const alertBox = document.getElementById("rotate-alert");
+  if (window.innerHeight > window.innerWidth) {
+    alertBox.style.display = "block";
+    document.body.style.overflow = "hidden";
+  } else {
+    alertBox.style.display = "none";
+    document.body.style.overflow = "auto";
+  }
+}
+
+checkOrientation(); // 初回もチェック
+
+// ==========================
 // テーマ管理・切り替え処理
 // ==========================
 const ThemeManager = {
