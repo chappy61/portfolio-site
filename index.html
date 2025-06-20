@@ -2,7 +2,7 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,">
     <title>My Portfolio</title>
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="icon.css" />
@@ -14,160 +14,162 @@
       <div class="loading-text">Now Loading...</div>
     </div>
     <div class="content">
-      <!-- ========================== -->
-      <!-- 切り替え -->
-      <!-- ========================== -->
-      <div class="theme-switcher">
-        <button id="themeToggleBtn">
-          <div class="menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
+      <div class="viewport">
+        <!-- ========================== -->
+        <!-- 切り替え -->
+        <!-- ========================== -->
+        <div class="theme-switcher">
+          <button id="themeToggleBtn">
+            <div class="menu-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+        <div class="icon-area icon-area-l">
+          <!-- QuotDictアイコン -->
+          <div class="icon quotdict-node" id="icon-quotdict">
+            <a href="https://quotdict.onrender.com" class="book-icon-open-wide" data-app="QuotDict" data-link="true">
+              <div class="book-icon-cover"></div>
+            </a>
+            <span class="icon-label">QuotDict</span>
           </div>
-        </button>
-      </div>
-      <div class="icon-area icon-area-l">
-        <!-- QuotDictアイコン -->
-        <div class="icon quotdict-node" id="icon-quotdict">
-          <a href="https://quotdict.onrender.com" class="book-icon-open-wide" data-app="QuotDict" data-link="true">
-            <div class="book-icon-cover"></div>
-          </a>
-          <span class="icon-label">QuotDict</span>
+          <!-- Safariアイコン -->
+          <div class="icon safari-node" id="icon-safari">
+            <a href="#" data-app="IntroLog">
+              <div class="icon-safari"></div>
+            </a>
+            <span class="icon-label icon-label-safari">HP[DEMO]</span>
+          </div>
+          <!-- Chromeアイコン -->
+          <div class="icon chrome-node" id="icon-chrome">
+            <a href="#" data-app="IntroLog">
+              <div class="icon-chrome"></div>
+            </a>
+            <span class="icon-label icon-label-chrome">LP[DEMO]</span>
+          </div>
+        </div>  
+        <!-- Steamアイコン -->
+        <div class="icon-area icon-area-r">
+          <div class="icon game-icon steam-node" id="icon-steam">
+            <a href="#" data-app="SteamApp" data-link="true">
+              <div class="icon-steam">
+                <div class="steam-arm-wrapper natural-swing">
+                  <div class="joint main-joint"></div>
+                  <div class="steam-arm"></div>
+                  <div class="joint sub-joint"></div>
+                </div>
+              </div>
+            </a>
+            <span class="icon-label icon-label-steam">GAME</span>
+          </div>
         </div>
-        <!-- Safariアイコン -->
-        <div class="icon safari-node" id="icon-safari">
-          <a href="#" data-app="IntroLog">
-            <div class="icon-safari"></div>
-          </a>
-          <span class="icon-label icon-label-safari">HP[DEMO]</span>
+        <!-- ========================== -->
+        <!-- トグル -->
+        <!-- ========================== -->
+        <div class="node-wrapper mac-only" data-target="#icon-quotdict">
+          <div class="toggle-content">
+            ■ QuotDict ■ 
+            <br>■ Flask（Python） □ 約2週間（実働10日）  
+            <br>■ コードや引用を保存できるWeb辞書ツール □ 初めてGitHub・Renderで公開しました。
+          </div>
+          <div class="line"></div>
         </div>
-        <!-- Chromeアイコン -->
-        <div class="icon chrome-node" id="icon-chrome">
-          <a href="#" data-app="IntroLog">
-            <div class="icon-chrome"></div>
-          </a>
-          <span class="icon-label icon-label-chrome">LP[DEMO]</span>
+        <div class="node-wrapper mac-only" data-target="#icon-safari">
+          <div class="toggle-content">
+            ■ HP(模擬) ■
+            <br>■ Flask（Python） □ 約//週間（実働//日）  
+            <br>■ // □ //
+          </div>
+          <div class="line"></div>
         </div>
-      </div>  
-      <!-- Steamアイコン -->
-      <div class="icon-area icon-area-r">
-        <div class="icon game-icon steam-node" id="icon-steam">
-          <a href="#" data-app="SteamApp" data-link="true">
-            <div class="icon-steam">
-              <div class="steam-arm-wrapper natural-swing">
-                <div class="joint main-joint"></div>
-                <div class="steam-arm"></div>
-                <div class="joint sub-joint"></div>
+        <div class="node-wrapper mac-only" data-target="#icon-chrome">
+          <div class="toggle-content">
+            ■ LP(模擬) ■
+            <br>■ Flask（Python） □ 約//週間（実働//日）  
+            <br>■ // □ //
+          </div>
+          <div class="line"></div>
+        </div>        
+        <div class="node-wrapper mac-only offset-down" data-target="#warning-c">
+          <div class="toggle-content">
+            ■ System Status ■  
+            <br>■ 異常ログ検出中：Phase-3 Threshold Over  
+            <br>■ 複数アラート連携済 - LayerSync ON  
+            <br>■ DataTrace: Re:Trace[1/∞]  
+            <br>→ ※この情報は演出目的のダミーです
+          </div>
+          <div class="line" data-source=".warning-a"></div>
+          <div class="line" data-source=".warning-b"></div>
+          <div class="line" data-source=".warning-c"></div>
+        </div>
+        <div class="node-wrapper mac-only left-node" data-target="#icon-steam">
+          <div class="toggle-content">
+            ■ game ■  
+            <br>■ Flask（Python） □ 約//週間（実働//日）  
+            <br>■ // □ //
+          </div>
+          <div class="line"></div>
+        </div>
+        <!-- ========================== -->
+        <!-- ウィンドウ風自己紹介 -->
+        <!-- ========================== -->
+        <div class="window static-window">
+          <div class="window-header">
+            <div class="system-controls">
+              <button class="system-btn override-btn" data-tooltip="早送り">OVERRIDE »</button>
+              <button class="system-btn reboot-btn" data-tooltip="最初から">REBOOT</button>
+              <button class="system-btn shutdown-btn" data-tooltip="全文表示">FORCE DUMP</button>
+            </div>
+            <span class="log-close">✖</span>
+          </div>
+          <div id="boot-screen" class="boot-screen">
+            <pre class="boot-log"></pre>
+          </div>
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ A -->
+          <!-- ========================== -->
+          <div class="alert-window warning-a">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ SYSTEM ERROR ]</div>
+            <div class="alert-body">
+              Memory access violation.<br>
+              Code: <code>0x001D9</code><br>
+              Status: <span class="blink">CRITICAL</span>
+            </div>
+          </div>
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ B -->
+          <!-- ========================== -->
+          <div class="alert-window warning-b">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ PROCESS FAILURE ]</div>
+            <div class="alert-body">
+              Subsystem communication lost.<br>
+              Code: <code>0x003EE</code><br>
+              Status: <span class="blink">ERROR</span>
+            </div>
+          </div>
+          <!-- ========================== -->
+          <!-- ログ風ウィンドウ -->
+          <!-- ========================== -->
+          <div class="alert-window warning-c" id="warning-c">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ ANALYSIS LOG ]</div>
+            <div class="alert-body">
+              <div class="log-body" id="logBody">
+                <div class="cursor" id="cursor">▍</div>
               </div>
             </div>
-          </a>
-          <span class="icon-label icon-label-steam">GAME</span>
-        </div>
-      </div>
-      <!-- ========================== -->
-      <!-- トグル -->
-      <!-- ========================== -->
-      <div class="node-wrapper mac-only" data-target="#icon-quotdict">
-        <div class="toggle-content">
-          ■ QuotDict ■ 
-          <br>■ Flask（Python） □ 約2週間（実働10日）  
-          <br>■ コードや引用を保存できるWeb辞書ツール □ 初めてGitHub・Renderで公開しました。
-        </div>
-        <div class="line"></div>
-      </div>
-      <div class="node-wrapper mac-only" data-target="#icon-safari">
-        <div class="toggle-content">
-          ■ HP(模擬) ■
-          <br>■ Flask（Python） □ 約//週間（実働//日）  
-          <br>■ // □ //
-        </div>
-        <div class="line"></div>
-      </div>
-      <div class="node-wrapper mac-only" data-target="#icon-chrome">
-        <div class="toggle-content">
-          ■ LP(模擬) ■
-          <br>■ Flask（Python） □ 約//週間（実働//日）  
-          <br>■ // □ //
-        </div>
-        <div class="line"></div>
-      </div>        
-      <div class="node-wrapper mac-only offset-down" data-target="#warning-c">
-        <div class="toggle-content">
-          ■ System Status ■  
-          <br>■ 異常ログ検出中：Phase-3 Threshold Over  
-          <br>■ 複数アラート連携済 - LayerSync ON  
-          <br>■ DataTrace: Re:Trace[1/∞]  
-          <br>→ ※この情報は演出目的のダミーです
-        </div>
-        <div class="line" data-source=".warning-a"></div>
-        <div class="line" data-source=".warning-b"></div>
-        <div class="line" data-source=".warning-c"></div>
-      </div>
-      <div class="node-wrapper mac-only left-node" data-target="#icon-steam">
-        <div class="toggle-content">
-          ■ game ■  
-          <br>■ Flask（Python） □ 約//週間（実働//日）  
-          <br>■ // □ //
-        </div>
-        <div class="line"></div>
-      </div>
-      <!-- ========================== -->
-      <!-- ウィンドウ風自己紹介 -->
-      <!-- ========================== -->
-      <div class="window static-window">
-        <div class="window-header">
-          <div class="system-controls">
-            <button class="system-btn override-btn" data-tooltip="早送り">OVERRIDE »</button>
-            <button class="system-btn reboot-btn" data-tooltip="最初から">REBOOT</button>
-            <button class="system-btn shutdown-btn" data-tooltip="全文表示">FORCE DUMP</button>
           </div>
-          <span class="log-close">✖</span>
+        </div><!--window static-window-->
+        <!-- 自己紹介ログのオーバーレイ ウィンドウ内に入れない-->
+        <div id="log-overlay" class="hidden">
+          <div id="profile-title">My Profile</div>
+          <pre id="log-output"></pre>
         </div>
-        <div id="boot-screen" class="boot-screen">
-          <pre class="boot-log"></pre>
-        </div>
-        <!-- ========================== -->
-        <!-- 警告ウィンドウ A -->
-        <!-- ========================== -->
-        <div class="alert-window warning-a">
-          <button class="close-btn">✖</button>
-          <div class="alert-header">[ SYSTEM ERROR ]</div>
-          <div class="alert-body">
-            Memory access violation.<br>
-            Code: <code>0x001D9</code><br>
-            Status: <span class="blink">CRITICAL</span>
-          </div>
-        </div>
-        <!-- ========================== -->
-        <!-- 警告ウィンドウ B -->
-        <!-- ========================== -->
-        <div class="alert-window warning-b">
-          <button class="close-btn">✖</button>
-          <div class="alert-header">[ PROCESS FAILURE ]</div>
-          <div class="alert-body">
-            Subsystem communication lost.<br>
-            Code: <code>0x003EE</code><br>
-            Status: <span class="blink">ERROR</span>
-          </div>
-        </div>
-        <!-- ========================== -->
-        <!-- ログ風ウィンドウ -->
-        <!-- ========================== -->
-        <div class="alert-window warning-c" id="warning-c">
-          <button class="close-btn">✖</button>
-          <div class="alert-header">[ ANALYSIS LOG ]</div>
-          <div class="alert-body">
-            <div class="log-body" id="logBody">
-              <div class="cursor" id="cursor">▍</div>
-            </div>
-          </div>
-        </div>
-      </div><!--window static-window-->
-      <!-- 自己紹介ログのオーバーレイ ウィンドウ内に入れない-->
-      <div id="log-overlay" class="hidden">
-        <div id="profile-title">My Profile</div>
-        <pre id="log-output"></pre>
-      </div>
+      </div><!--viewport-->
     </div><!--content-->
     <script src="script.js"></script>
   </body>
