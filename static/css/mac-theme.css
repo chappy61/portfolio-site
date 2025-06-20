@@ -111,7 +111,8 @@
 /* Macテーマでのノード囲い */
 .mac-theme .quotdict-node::before,
 .mac-theme .safari-node::before,
-.mac-theme .chrome-node::before {
+.mac-theme .chrome-node::before,
+.mac-theme .steam-node::before {
   content: "";
   position: absolute;
   top: -15px;
@@ -127,7 +128,8 @@
 /* Winテーマでのノード囲い非表示 */
 .win-theme .quotdict-node::before,
 .win-theme .safari-node::before,
-.win-theme .chrome-node::before {
+.win-theme .chrome-node::before,
+.win-theme .steam-node::before {
   content: none;
 }
 

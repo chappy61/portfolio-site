@@ -1,117 +1,22 @@
-/* ========== ゲームアイコン専用スタイル ========== */
-/* ゲームアイコンの基本スタイル */
-.game-icon-specific {
-  position: fixed !important;
-  right: 90px !important;
-  top: 20%;
-  width: 64px;
-  height: 64px;
-  background-color: #333;
-  border: 2px solid #888;
-  border-radius: 8px;
-  box-shadow: 0 0 6px rgba(100, 200, 255, 0.3);
-}
-
-/* ゲームアイコンのスクリーン部分 */
-.game-icon-specific .screen {
-  position: absolute;
-  top: 12px;
-  left: -2px;
-  width: 48px;
-  height: 28px;
-  background-color: #111;
-  border: 2px solid #5af;
-  border-radius: 0;
-  box-shadow: inset 0 0 4px rgba(90, 200, 255, 0.4);
-}
-
-/* ゲームアイコンのDパッド */
-.game-icon-specific .dpad {
-  position: absolute;
-  top: 60px;
-  left: -5px;
-  width: 16px;
-  height: 16px;
-  z-index: 3;
-}
-
-/* Dパッドの縦横バー */
-.game-icon-specific .dpad .vert,
-.game-icon-specific .dpad .horiz {
-  position: absolute;
-  background: #9fe0ff;
-  box-shadow: 0 0 6px rgba(159, 224, 255, 0.8);
-  border-radius: 1.5px;
-  opacity: 0.85;
-}
-
-/* Dパッドの縦バー */
-.game-icon-specific .dpad .vert {
-  left: 7px;
-  top: 0;
-  width: 2.5px;
-  height: 16px;
-}
-
-/* Dパッドの横バー */
-.game-icon-specific .dpad .horiz {
-  top: 7px;
-  left: 0;
-  width: 16px;
-  height: 2.5px;
-}
-
-/* Aボタン */
-.game-icon-specific .button-a {
-  position: absolute;
-  top: 65px;
-  right: 15px;
-  width: 8px;
-  height: 8px;
-  background: #9fe0ff;
-  box-shadow: 0 0 8px rgba(159, 224, 255, 0.9);
-  border-radius: 50%;
-  opacity: 0.85;
-  z-index: 3;
-}
-
-/* Bボタン */
-.game-icon-specific .button-b {
-  position: absolute;
-  top: 65px;
-  right: -4px;
-  width: 8px;
-  height: 8px;
-  background: #9fe0ff;
-  box-shadow: 0 0 8px rgba(159, 224, 255, 0.9);
-  border-radius: 50%;
-  opacity: 0.85;
-  z-index: 3;
-}
-
-/* ゲームアイコンのホバーエフェクト */
-.game-icon-specific:hover {
-  transform: scale(0.5);
-}
-
-/* ホバー時のスクリーン */
-.game-icon-specific:hover .screen {
-  background-color: #1c2f40;
-  box-shadow:
-    inset 0 0 8px rgba(90, 200, 255, 0.8),
-    0 0 8px rgba(90, 200, 255, 0.4),
-    0 0 12px rgba(90, 200, 255, 0.2);
-}
 
 /* ========== アイコンエリア ========== */
 /* アイコンエリアの配置 */
-.icon-area {
+.icon-area-l {
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: absolute;
   top: 20px;
   left: 20px;
+}
+
+.icon-area-r {
+  position: absolute;
+  right: 40px;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 /* 個々のアイコンのスタイル */
@@ -153,24 +58,149 @@
   transform: scale(1.05);
 }
 
+/* ========== ゲームアイコン専用スタイル ========== */
+/* Steamアイコンのスタイル */
+.icon-steam {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1b2838;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.4), 0 0 6px rgba(102, 192, 244, 0.3);
+  animation: shimmer 6s ease-in-out infinite;
+  transition: transform 0.8s ease;
+  transform: rotate(0deg);
+  overflow: visible; /* アームがはみ出せるように */
+}
+
+/* 中央ジョイント（メイン） */
+.joint.main-joint {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;         /* 外丸の色 */
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 中の丸（◎の中心） */
+.joint.main-joint::before {
+  content: "";
+  position: absolute;
+  top: 48%;
+  left: 51.5%;
+  width: 7px;
+  height: 7px;
+  background: white;         /* 内丸の色 */
+  border: 2px solid #1b2838;   /* 内丸の黒フチ */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+/* アーム */
+.steam-arm {
+  position: absolute;
+  width: 26px;
+  height: 8px;
+  background: white;
+  top: 65%;
+  left: 50%;
+  transform-origin: left center;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  z-index: 1;
+  border-radius: 5px 2px 2px 5px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
+  box-shadow: 0 0 4px rgba(102, 192, 244, 0.6);
+}
+
+/* 先端ジョイント（小） */
+.joint.sub-joint {
+  position: absolute;
+  top: 63%;
+  left: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;         /* 外丸の色 */
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 中の丸（◎の中心） */
+.joint.sub-joint::before {
+  content: "";
+  position: absolute;
+  top: 50.5%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  background: white;         /* 内丸の色 */
+  border: 2px solid #1b2838;   /* 内丸の黒フチ */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.steam-arm-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: 28% 63%; /* ← サブジョイント位置に合わせる */
+  transition: transform 0.3s ease;
+  pointer-events: none; /* ← ラッパー自体はクリック不要ならこれで安心 */
+}
+
+.icon-steam:hover .steam-arm-wrapper {
+  animation: arm-swing 1.2s ease-in-out;
+}
+
+@keyframes arm-swing {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(15deg); }
+  40%  { transform: rotate(-12deg); }
+  60%  { transform: rotate(10deg); }
+  80%  { transform: rotate(-6deg); }
+  100% { transform: rotate(0deg); }
+}
+/* ナチュラルスイング用アニメーション */
+@keyframes arm-natural-swing {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(12deg); }
+  30%  { transform: rotate(-10deg); }
+  45%  { transform: rotate(8deg); }
+  60%  { transform: rotate(-6deg); }
+  75%  { transform: rotate(5deg); }
+  90%  { transform: rotate(-3deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.icon-steam:hover .steam-arm-wrapper.natural-swing {
+  animation: arm-natural-swing 1.5s ease-in-out infinite;
+}
+
 /* ========== 本アイコン（共通） ========== */
 /* 本アイコンの基本スタイル */
 .book-icon-open-wide {
   position: relative;
   width: 48px;
   height: 38px;
-  perspective: 200px;
+  perspective: 300px;
 }
 
-/* 本の表紙 */
+/* 本の表紙全体 */
 .book-icon-cover {
   position: relative;
   width: 48px;
   height: 38px;
-  perspective: 200px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease, filter 0.6s ease;
 }
 
-/* 本の左ページ（表紙） */
+/* 左ページ（表紙） */
 .book-icon-cover::before {
   content: "";
   position: absolute;
@@ -181,13 +211,14 @@
   background: linear-gradient(to right, #dcdcdc, #fdfdfd);
   border: 1px solid #aaa;
   border-radius: 3px 0 0 3px;
-  box-shadow: inset -1px 0 2px rgb(110, 110, 110), -2px 0 3px #00552e;
-  transform: rotateY(22deg);
+  box-shadow: inset -1px 0 2px rgba(110, 110, 110, 0.5), -2px 0 3px #00552e;
   transform-origin: left center;
+  transform: rotateY(22deg);
+  transition: transform 0.6s ease;
   z-index: 2;
 }
 
-/* 本の右ページ（表紙） */
+/* 右ページ（裏） */
 .book-icon-cover::after {
   content: "";
   position: absolute;
@@ -198,23 +229,20 @@
   background: linear-gradient(to left, #dcdcdc, #fdfdfd);
   border: 1px solid #aaa;
   border-radius: 0 3px 3px 0;
-  box-shadow: inset -1px 0 2px rgb(110, 110, 110), 2px 0 3px #00552e;
-  transform: rotateY(-22deg);
+  box-shadow: inset -1px 0 2px rgba(110, 110, 110, 0.5), 2px 0 3px #00552e;
   transform-origin: right center;
+  transform: rotateY(-22deg);
+  transition: transform 0.6s ease;
   z-index: 1;
 }
-
-/* 本の折り目効果 */
-.book-icon-cover::before,
-.book-icon-cover::after {
-  background-image: linear-gradient(
-    to right,
-    #dcdcdc,
-    #f0f0f0 45%,
-    #aaa 50%,
-    #f0f0f0 55%,
-    #dcdcdc
-  );
+@keyframes wiggle {
+  0% { transform: rotateZ(0); }
+  50% { transform: rotateZ(5deg); }
+  100% { transform: rotateZ(-5deg); }
+}
+.book-icon-cover:hover {
+  animation: wiggle 0.5s infinite;
+  
 }
 
 /* ========== ブラウザ風アイコン ========== */
