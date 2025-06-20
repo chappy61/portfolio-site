@@ -10,22 +10,9 @@ const openedWindows = new Map();
 // ==========================
 // ランドスケープ
 // ==========================
-window.addEventListener("orientationchange", checkOrientation);
-window.addEventListener("resize", checkOrientation);
-
-function checkOrientation() {
-  const alertBox = document.getElementById("rotate-alert");
-  if (window.innerHeight > window.innerWidth) {
-    alertBox.style.display = "block";
-    document.body.style.overflow = "hidden";
-  } else {
-    alertBox.style.display = "none";
-    document.body.style.overflow = "auto";
-  }
-}
-
-checkOrientation(); // 初回もチェック
-
+window.addEventListener("resize", () => {
+  // 画面幅によってクラス切り替え等を実装可能
+});
 // ==========================
 // テーマ管理・切り替え処理
 // ==========================
