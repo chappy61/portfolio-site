@@ -1,5 +1,4 @@
 /* ========== 共通スタイル ========== */
-/* ページ全体の基本レイアウトとスタイル */
 body {
   margin: 0;
   font-family: 'Courier New', monospace, system-ui, sans-serif;
@@ -12,10 +11,11 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  flex-direction: column;
 }
 
+
 /* ========== ローディングオーバーレイ ========== */
-/* ページ読み込み時のオーバーレイ */
 #loading-overlay {
   position: fixed;
   top: 0;
@@ -29,19 +29,15 @@ body {
   z-index: 9999;
   transition: opacity 1s ease, visibility 1s ease;
 }
-/* ローディングバーのコンテナ */
 .loading-bar-container {
   text-align: center;
   padding-top: 30px;
 }
-
-/* フェードアウト時のスタイル */
 #loading-overlay.fade-out {
   opacity: 0;
   visibility: hidden;
+  display: none !important; /* 確実に非表示 */
 }
-
-/* ローディングテキストのスタイル */
 .loading-text {
   font-family: 'Cinzel', serif;
   letter-spacing: 0.1em;
@@ -50,15 +46,12 @@ body {
   margin-bottom: 10px;
   animation: fadeIn 1s ease-in-out infinite alternate;
 }
-
-/* ローディングテキストの点滅アニメーション */
 @keyframes flicker {
   0% { opacity: 1; }
   100% { opacity: 0.6; }
 }
 
 /* ========== 自己紹介オーバーレイ ========== */
-/* 自己紹介オーバーレイの基本スタイル */
 .overlay {
   position: fixed;
   inset: 0;
@@ -73,19 +66,14 @@ body {
   opacity: 0;
   transition: opacity 0.8s ease;
 }
-
-/* アクティブ時のスタイル */
 .overlay.active {
   opacity: 1;
 }
-
-/* 非表示要素 */
 .hidden {
   display: none !important;
 }
 
 /* ========== テーマ切り替えボタン ========== */
-/* テーマ切り替えボタンのコンテナ */
 .theme-switcher {
   position: absolute;
   top: 20px;
@@ -93,8 +81,6 @@ body {
   display: flex;
   gap: 0.5rem;
 }
-
-/* 切り替えボタン本体 */
 .theme-switcher button {
   width: 64px;
   height: 64px;
@@ -108,7 +94,6 @@ body {
 }
 
 /* ========== メニューアイコン ========== */
-/* メニューアイコンの基本スタイル */
 .menu-icon {
   width: 30px;
   height: 24px;
@@ -117,8 +102,6 @@ body {
   justify-content: space-between;
   cursor: pointer;
 }
-
-/* メニューアイコンのバー */
 .menu-icon span {
   display: block;
   height: 3px;
@@ -127,8 +110,6 @@ body {
   transition: background-color 0.3s ease, opacity 0.3s ease;
   box-shadow: 0 0 6px rgba(43, 55, 226, 0.5);
 }
-
-/* ホバー時のバー */
 .menu-icon:hover span {
   background-color: rgba(200, 200, 255, 0.9);
   opacity: 0.8;
@@ -136,7 +117,6 @@ body {
 }
 
 /* ========== パーティクルエフェクト ========== */
-/* クリック時のキラキラエフェクト */
 .particle {
   position: absolute;
   width: 6px;
@@ -149,7 +129,6 @@ body {
 }
 
 /* ========== テーマ共通スタイル ========== */
-/* win-theme と mac-theme の基本スタイル */
 .win-theme,
 .mac-theme {
   --bg-color: #121212;
@@ -162,8 +141,6 @@ body {
   color: var(--text-color);
   position: relative;
 }
-
-/* 背景グリッド */
 .win-theme::before,
 .mac-theme::before {
   content: "";
@@ -179,22 +156,23 @@ body {
   background-size: 40px 40px;
   z-index: 0;
 }
-/* スマホ用UI */
+
+/* ========== スマホ用UI ========== */
 .mobile-home-ui {
   position: fixed;
   inset: 0;
   z-index: 99999;
   background: linear-gradient(#0a0a0a, #1a1a2f);
   color: #fff;
+  display: none; /* 初期非表示 */
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   font-family: 'Courier New', monospace;
 }
-
 .status-bar {
   width: 100%;
-  padding: 10px 16px;
+  padding: 10px 32px 10px 32px; /* ← 左右のpaddingを狭くする */
   display: flex;
   justify-content: space-between;
   font-size: 14px;
@@ -209,7 +187,6 @@ body {
   gap: 20px;
   justify-content: center;
 }
-
 .app-icon {
   width: 80px;
   height: 80px;
@@ -223,11 +200,9 @@ body {
   cursor: pointer;
   transition: transform 0.2s;
 }
-
 .app-icon:hover {
   transform: scale(1.05);
 }
-
 .app-icon .label {
   font-size: 12px;
   margin-top: 4px;
@@ -239,21 +214,18 @@ body {
   margin-top: 20px;
   gap: 20px;
 }
-
 .top-icons .app-icon {
   width: 80px;
   height: 80px;
 }
-
 .single-icon .app-icon {
   width: 100px;
   height: 100px;
 }
-
 .mobile-log-area {
   margin: 30px 20px 20px 20px;
   padding: 10px;
-  background: rgba(255 255 255 / 0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: #eee;
   font-family: monospace;
   font-size: 14px;
@@ -275,28 +247,23 @@ body {
   gap: 8px;
   box-shadow: 0 0 8px rgba(173,216,230,0.3);
 }
-
 .track-info {
   text-align: center;
 }
-
 .track-title {
   font-weight: bold;
   font-size: 14px;
   color: #aee;
 }
-
 .track-artist {
   font-size: 12px;
   color: #aaa;
 }
-
 .controls {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .play-btn {
   background: none;
   border: 1px solid #aee;
@@ -304,7 +271,6 @@ body {
   border-radius: 6px;
   padding: 4px 8px;
 }
-
 .progress-bar {
   flex: 1;
   height: 6px;
@@ -312,13 +278,11 @@ body {
   border-radius: 3px;
   overflow: hidden;
 }
-
 .progress {
   width: 30%;
   height: 100%;
   background: #aee;
 }
-/* ====== 天気ログ ====== */
 .weather-log {
   font-family: 'Courier New', monospace;
   font-size: 11px;
@@ -328,8 +292,6 @@ body {
   text-align: center;
   line-height: 1.4;
 }
-
-/* ====== クラゲ演出（CSS簡易版） ====== */
 .jellyfish-container {
   position: fixed;
   inset: 0;
@@ -337,7 +299,6 @@ body {
   overflow: hidden;
   pointer-events: none;
 }
-
 .jellyfish {
   position: absolute;
   width: 40px;
@@ -347,7 +308,6 @@ body {
   animation: floatUp 30s infinite ease-in-out;
   filter: blur(3px);
 }
-
 .jellyfish:nth-child(1) {
   left: 20%;
   bottom: -60px;
@@ -364,7 +324,6 @@ body {
   animation-duration: 36s;
   transform: scale(0.8);
 }
-
 @keyframes floatUp {
   0% {
     transform: translateY(0) scale(1);
@@ -380,3 +339,30 @@ body {
   }
 }
 
+/* ========== メディアクエリ ========== */
+@media screen and (max-width: 768px) {
+  .mobile-home-ui {
+    display: flex !important;
+  }
+  .mobile-home-ui.hidden {
+    display: flex !important; /* hiddenを上書き */
+  }
+  .content, .viewport {
+    display: none !important;
+  }
+  .jellyfish-container, .weather-log {
+    display: block;
+  }
+}
+@media screen and (min-width: 769px) {
+  .mobile-home-ui {
+    display: none !important;
+  }
+  .content, .viewport {
+    display: block !important;
+    opacity: 1 !important;
+  }
+  .jellyfish-container, .weather-log {
+    display: none;
+  }
+}
