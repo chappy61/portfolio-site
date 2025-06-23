@@ -10,9 +10,58 @@
     <link rel="stylesheet" href="mac-theme.css" />
   </head>
   <body class="win-theme">
-    <div id="loading-overlay">
-      <div class="loading-text">Now Loading...</div>
-    </div>
+      <!-- ========================== -->
+      <!-- スマホ用待ち受けUI（PC非表示） -->
+      <!-- ========================== -->
+      <div id="mobileHomeUI" class="mobile-home-ui hidden">
+        <div class="status-bar">
+          <span id="mobileTime" class="mobile-time">23:58</span>
+          <span class="mobile-signal">📶</span>
+          <span class="mobile-battery">🔋83%</span>
+        </div>
+
+        <div class="app-grid top-icons">
+          <div class="app-icon" id="mobileQuotIcon">📖<span class="label">Dict</span></div>
+          <div class="app-icon" id="mobileHpIcon">🧭<span class="label">HP</span></div>
+          <div class="app-icon" id="mobileLpIcon">🌐<span class="label">LP</span></div>
+        </div>
+
+        <div class="app-grid bottom-icons">
+          <div class="app-icon" id="mobileGameIcon">🎮<span class="label">Game</span></div>
+          <div class="app-icon" id="mobileProfileIcon">👤<span class="label">Me</span></div>
+          <div class="app-icon" id="mobileHelpIcon">❓<span class="label">Guide</span></div>
+        </div>
+
+        <div class="music-widget">
+          <div class="track-info">
+            <div class="track-title">儚く灯る夜</div>
+            <div class="track-artist">Miya Shimokawa</div>
+          </div>
+          <div class="controls">
+            <button class="play-btn">▶</button>
+            <div class="progress-bar"><div class="progress"></div></div>
+          </div>
+        </div>
+        <!-- 🌤 天気ログ -->
+        <div class="weather-log">
+          ■ 天気：Unknown Mist（外界との同期に失敗しました）<br>
+          ■ 湿度：83%　気温：17.6℃<br>
+          ■ 状態：静止中ノイズ検出（Normal）
+        </div>
+
+        <!-- 🪼 クラゲ用コンテナ -->
+        <div class="jellyfish-container">
+          <div class="jellyfish"></div>
+          <div class="jellyfish delay"></div>
+          <div class="jellyfish smaller"></div>
+        </div>
+
+      <!-- ========================== -->
+      <!-- ロード -->
+      <!-- ========================== -->
+      <div id="loading-overlay">
+        <div class="loading-text">Now Loading...</div>
+      </div>
     <div class="content">
       <div class="viewport">
         <!-- ========================== -->

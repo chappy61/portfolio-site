@@ -8,11 +8,77 @@ const windowHeight = 200;
 const openedWindows = new Map();
 
 // ==========================
-// ランドスケープ
+// スマホ用
 // ==========================
-window.addEventListener("resize", () => {
-  // 画面幅によってクラス切り替え等を実装可能
+function updateMobileUI() {
+  const isMobile = window.innerWidth <= 768;
+  const mobileUI = document.getElementById("mobileHomeUI");
+  const content = document.querySelector(".content");
+
+  if (isMobile && mobileUI && content) {
+    mobileUI.classList.remove("hidden");
+    content.style.display = "none";
+    console.log("✅ スマホUI表示に切り替え完了！");
+  } else if (mobileUI && content) {
+    mobileUI.classList.add("hidden");
+    content.style.display = "block";
+    console.log("🖥️ PC表示のまま");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", updateMobileUI);
+window.addEventListener("resize", updateMobileUI);
+
+  // 時計更新（リアルタイム）
+  const updateClock = () => {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2, '0');
+    const m = now.getMinutes().toString().padStart(2, '0');
+    document.getElementById("mobileTime").textContent = `${h}:${m}`;
+  };
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  // アプリ起動イベント
+  document.getElementById("mobileSafariIcon")?.addEventListener("click", () => {
+    mobileUI.classList.add("hidden");
+    content.style.display = "block";
+    showLog?.(); // 自己紹介表示関数
+  });
+
+  document.getElementById("mobileQuotIcon")?.addEventListener("click", () => {
+    window.location.href = "https://quotdict.onrender.com";
+  });
+
+  document.getElementById("mobileGameIcon")?.addEventListener("click", () => {
+    window.open("ゲームのリンクやページ", "_blank");
+  });
+document.getElementById("mobileGameIcon").addEventListener("click", () => {
+  showMobileLog([
+    ">>> Game 起動中...",
+    ">>> ジャンル: 回避型ミニゲーム",
+    ">>> 特徴: 残像・SF・ノイズ表現",
+    ">>> 状態: 試作完了・デモ公開中",
+    ">>> END"
+  ]);
 });
+
+document.getElementById("mobileProfileIcon").addEventListener("click", () => {
+  showMobileLog(logLines); // 既存の自己紹介ログ
+});
+
+document.getElementById("mobileHelpIcon").addEventListener("click", () => {
+  showMobileLog([
+    ">>> 説明モード起動中...",
+    ">>> このページは仮想デスクトップ風ポートフォリオ",
+    ">>> 各アイコンをクリックすると説明 or アプリ起動",
+    ">>> MACテーマでノード説明も表示されます",
+    ">>> 詳細はPC版を推奨します",
+    ">>> END"
+  ]);
+});
+
+
 // ==========================
 // テーマ管理・切り替え処理
 // ==========================
