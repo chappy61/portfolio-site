@@ -48,13 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("mobileGameIcon")?.addEventListener("click", () => {
-    showMobileLog([
-      ">>> Game 起動中...",
-      ">>> ジャンル: 回避型ミニゲーム",
-      ">>> 特徴: 残像・SF・ノイズ表現",
-      ">>> 状態: 試作完了・デモ公開中",
-      ">>> END"
-    ]);
+    window.location.href = "https://chappy61.github.io/mini-game/";
   });
 
   document.getElementById("mobileProfileIcon")?.addEventListener("click", () => {
@@ -72,6 +66,65 @@ document.addEventListener("DOMContentLoaded", () => {
     ]);
   });
 });
+function showMobileLog(lines) {
+  // ログ表示用の要素を用意（あれば使う）
+  let container = document.getElementById("mobileLogContainer");
+  
+  if (!container) {
+    // なければ新しく作ってbodyに追加
+    container = document.createElement("pre");
+    container.id = "mobileLogContainer";
+    container.style.position = "fixed";
+    container.style.top = "10%";
+    container.style.left = "5%";
+    container.style.width = "90%";
+    container.style.height = "80%";
+    container.style.backgroundColor = "rgba(0,0,0,0.85)";
+    container.style.color = "#aaf";
+    container.style.padding = "1rem";
+    container.style.overflowY = "auto";
+    container.style.fontFamily = "monospace";
+    container.style.fontSize = "14px";
+    container.style.borderRadius = "8px";
+    container.style.zIndex = "99999";
+    container.style.userSelect = "text";
+    document.body.appendChild(container);
+  }
+
+  // 配列の各行をまとめて表示
+  container.textContent = lines.join("\n");
+
+  // もし閉じる仕組みが欲しいなら
+  container.addEventListener("click", () => {
+    container.remove();
+  });
+}
+// ==========================
+// カレンダー
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const el = document.getElementById("calendarWidget");
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+  const weekday = today.toLocaleDateString("ja-JP", { weekday: "long" });
+
+  // 曜日を縦に分割
+  const weekdayVertical = weekday.split("").map(char => `<div>${char}</div>`).join("");
+
+  el.innerHTML = `
+    <div class="calendar-header">${year}年${month}月</div>
+    <div class="calendar-main">
+      <div class="calendar-day">${day}</div>
+      <div class="calendar-weekday">${weekdayVertical}</div>
+    </div>
+  `;
+});
+
+
+
 // ==========================
 // テーマ管理・切り替え処理
 // ==========================

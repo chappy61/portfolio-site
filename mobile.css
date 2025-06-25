@@ -1,0 +1,409 @@
+/* ========== モバイルホームUIの基本レイアウト ========== */
+:root {
+  --main-side-padding: 20px;
+  --widget-max-width: 100%;
+  --side-padding: 20px;
+}
+
+.mobile-home-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: linear-gradient(#0a0a0a, #1a1a2f);
+  color: #fff;
+  display: flex !important;
+  flex-direction: column;
+  height: 100vh;
+  gap: 24px; /* 要素の間隔は広めに */
+  align-items: center;
+  font-family: 'Courier New', monospace;
+  justify-content: flex-start; /* ← 下に行きすぎ防止！ */
+  padding: 16px 20px;
+  padding-left: var(--side-padding);
+  padding-right: var(--side-padding);
+}
+
+/* ========== ステータスバー ========== */
+.status-bar {
+  width: 100%;
+  padding: 6px 16px;
+  display: flex;
+  justify-content: space-between; /* ← 左右分けるやつ！ */
+  font-size: 14px;
+}
+
+
+/* ========== アプリグリッドとアイコン ========== */
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px 16px; /* 行と列の隙間をちょっと違えてもOK */
+  width: 100%;
+  max-width: 340px;
+  justify-items: center;
+  margin-top: 40px;
+  padding: 0 var(--side-padding);
+}
+
+.app-icon {
+  width: 100px;
+  height: 100px;
+  font-size: 32px;
+  border-radius: 24px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.app-icon:hover {
+  transform: scale(1.05);
+}
+
+.app-icon .label {
+  position: absolute;
+  bottom: -20px; /* 枠外に表示 */
+  font-size: 13px;
+  color: #aee;
+}
+
+.app-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+/* ========== ログエリア ========== */
+.mobile-log-area {
+  width: 100%;
+  padding: 10px 16px;
+  margin: 0 auto 16px auto;
+  box-sizing: border-box; /* ← これが超重要！！ */
+  max-width: 100%;        /* ← 余白を含めた画面収まり */
+  background: rgba(255, 255, 255, 0.1);
+  color: #eee;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+}
+
+/* ========== ミュージックウィジェット ========== */
+.music-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  padding: 20px;
+  color: #aee;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  font-family: 'Courier New', monospace;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+.music-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.jacket-placeholder {
+  width: 60px;
+  height: 60px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.05);
+  flex-shrink: 0;
+}
+
+.track-info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.track-title {
+  font-size: 25px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.track-artist {
+  font-size: 20px;
+  color: #aaa;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.play-btn {
+  background: none;
+  border: 1px solid #aee;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: #aee;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+.play-btn:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.1);
+}
+.control-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 18px;
+  transition: all 0.2s ease;
+}
+.control-btn:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: #333;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress {
+  width: 30%;
+  height: 100%;
+  background: #aee;
+}
+
+/* ========== 横並びウィジェット ========== */
+.widget-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 var(--main-side-padding);
+  padding: 0 var(--side-padding);
+  box-sizing: border-box;
+  margin-top: 24px;
+}
+
+.calendar-widget,
+.weather-widget {
+  flex: 1;                      /* 横幅均等 */
+  min-height: 140px;            /* 高さ統一 */
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 16px;
+  color: #aee;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  font-family: 'Courier New', monospace;
+}
+/* ========== カレンダーウィジェット ========== */
+.calendar-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  color: #aee;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  width: 100%;
+  height: 100%; /* ウィジェット内でいっぱい使う！ */
+  box-sizing: border-box;
+}
+
+.calendar-header {
+  font-size: 20px;
+  color: #cce;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+
+.calendar-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  justify-content: center;
+  width: 100%;
+}
+
+.calendar-day {
+  font-size: 72px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.calendar-weekday {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  color: #9df;
+  line-height: 1.2;
+  padding-top: 8px;
+}
+/* ========== 天気ウィジェット ========== */
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-family: 'Courier New', monospace;
+  color: #aee;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  width: 100%;
+  box-sizing: border-box;
+  gap: 12px;
+}
+
+.weather-info-top {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.location {
+  font-size: 15px;
+  color: #9ac;
+}
+
+.alert {
+  font-size: 15px;
+  color: rgb(174, 20, 20);
+}
+
+.weather-info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #aee;
+}
+
+.weather-icon {
+  font-size: 35px;
+}
+
+.weather-stats {
+  font-size: 15px;
+}
+
+/* ========== クラゲアニメーション ========== */
+.jellyfish-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.jellyfish {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 255, 255, 0.3) 0%, transparent 80%);
+  animation: floatUp 30s infinite ease-in-out;
+  filter: blur(3px);
+}
+
+.jellyfish:nth-child(1) {
+  left: 20%;
+  bottom: -60px;
+  animation-duration: 28s;
+}
+
+.jellyfish:nth-child(2) {
+  left: 55%;
+  bottom: -80px;
+  animation-duration: 33s;
+}
+
+.jellyfish:nth-child(3) {
+  left: 35%;
+  bottom: -100px;
+  animation-duration: 36s;
+  transform: scale(0.8);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.05);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.95);
+    opacity: 0;
+  }
+}
+
+/* ========== メディアクエリ ========== */
+@media screen and (max-width: 768px) {
+  .mobile-home-ui {
+    display: flex !important;
+  }
+
+  .mobile-home-ui.hidden {
+    display: flex !important; /* hiddenを上書き */
+  }
+
+  .content,
+  .viewport {
+    display: none !important;
+  }
+
+  .jellyfish-container,
+  .weather-log {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .mobile-home-ui {
+    display: none !important;
+  }
+
+  .content,
+  .viewport {
+    display: block !important;
+    opacity: 1 !important;
+  }
+
+  .jellyfish-container,
+  .weather-log {
+    display: none;
+  }
+}

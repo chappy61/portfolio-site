@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0,">
     <title>My Portfolio</title>
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="icon.css" />
-    <link rel="stylesheet" href="window.css" />
-    <link rel="stylesheet" href="mac-theme.css" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="icon.css">
+    <link rel="stylesheet" href="window.css">
+    <link rel="stylesheet" href="mac-theme.css">
+    <link rel="stylesheet" href="mobile.css">
   </head>
   <body class="win-theme">
       <!-- ========================== -->
@@ -16,41 +17,53 @@
       <div id="mobileHomeUI" class="mobile-home-ui hidden">
         <div class="status-bar">
           <span id="mobileTime" class="mobile-time">23:58</span>
-          <span class="mobile-signal">📶</span>
-          <span class="mobile-battery">🔋83%</span>
+          <span class="mobile-battery">📶　🔋83%</span>
         </div>
 
         <div class="app-grid top-icons">
           <div class="app-icon" id="mobileQuotIcon">📖<span class="label">Dict</span></div>
           <div class="app-icon" id="mobileHpIcon">🧭<span class="label">HP</span></div>
           <div class="app-icon" id="mobileLpIcon">🌐<span class="label">LP</span></div>
-        </div>
-
-        <div class="app-grid bottom-icons">
           <div class="app-icon" id="mobileGameIcon">🎮<span class="label">Game</span></div>
           <div class="app-icon" id="mobileProfileIcon">👤<span class="label">Me</span></div>
           <div class="app-icon" id="mobileHelpIcon">❓<span class="label">Guide</span></div>
         </div>
 
-        
+      <div class="widget-row">
+        <div class="calendar-widget" id="calendarWidget"></div>
+
         <div class="weather-widget">
-          <div class="weather-icon">🌫️</div>
-          <div class="weather-info">
-            <div class="temp">17.6℃ / 湿度: 83%</div>
-            <div class="status">Unknown Mist</div>
+          <div class="weather-info-top">
+            <div class="location">🌍 Earth: ■■■
+            </div>
+            <div class="alert">⚠ MIST ALERT</div>
           </div>
-        </div>
-        <div class="music-widget">
-          <div class="track-info">
-            <div class="track-title">儚く灯る夜</div>
-            <div class="track-artist">Miya Shimokawa</div>
-          </div>
-          <div class="controls">
-            <button class="play-btn">▶</button>
-            <div class="progress-bar"><div class="progress"></div></div>
+          <div class="weather-info-bottom">
+            <div class="weather-icon">🌫️</div>
+            <div class="weather-stats">16.4℃<br>湿度:83%</div>
           </div>
         </div>
 
+      </div>
+
+      <div class="music-widget">
+        <div class="music-main">
+          <div class="jacket-placeholder"></div>
+          <div class="track-info-text">
+            <div class="track-title">Vox Pulchra</div>
+            <div class="track-artist">Beauvoir</div>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button class="control-btn">⏮</button>
+          <button class="play-btn">▶</button>
+          <button class="control-btn">⏭</button>
+        </div>
+
+        <div class="progress-bar"><div class="progress"></div></div>
+      </div>
+     
         <div class="jellyfish-container">
           <div class="jellyfish"></div>
           <div class="jellyfish delay"></div>
@@ -103,7 +116,7 @@
         <!-- Steamアイコン -->
         <div class="icon-area icon-area-r">
           <div class="icon game-icon steam-node" id="icon-steam">
-            <a href="#" data-app="SteamApp" data-link="true">
+            <a href="https://chappy61.github.io/mini-game/" data-app="SteamApp" data-link="true">
               <div class="icon-steam">
                 <div class="steam-arm-wrapper natural-swing">
                   <div class="joint main-joint"></div>
