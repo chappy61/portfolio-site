@@ -16,40 +16,42 @@
   align-items: center;
   justify-content: flex-start;
   font-family: 'Courier New', monospace;
-  padding: 16px var(--side-padding);
-  gap: 24px;
+  padding: 12px var(--side-padding);
+  gap: 12px;
   height: 100vh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  overflow: hidden;
   box-sizing: border-box;
 }
 
 /* ========== ステータスバー ========== */
 .status-bar {
   width: 100%;
-  padding: 6px 16px;
+  padding: 6px 12px;
   display: flex;
   justify-content: space-between;
   font-size: 14px;
+  flex-shrink: 0;
 }
 
 /* ========== アプリアイコン ========== */
 .app-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px 16px;
+  gap: 12px 8px;
   width: 100%;
   max-width: 340px;
   justify-items: center;
-  margin-top: 20px;
+  margin-top: 8px;
   padding: 0 var(--side-padding);
+  flex-shrink: 0;
+  margin-bottom: 6px;
 }
 
 .app-icon {
-  width: 80px;
-  height: 80px;
-  font-size: 24px;
-  border-radius: 20px;
+  width: 64px;
+  height: 64px;
+  font-size: 20px;
+  border-radius: 16px;
   background: rgba(255, 255, 255, 0.08);
   display: flex;
   flex-direction: column;
@@ -58,60 +60,33 @@
   position: relative;
   cursor: pointer;
   transition: transform 0.2s;
+  margin-bottom: 10px;
 }
-
 .app-icon:hover {
   transform: scale(1.05);
 }
-
 .app-icon .label {
   position: absolute;
-  bottom: -18px;
-  font-size: 11px;
+  bottom: -16px;
+  font-size: 10px;
   color: #aee;
 }
 
-/* ========== ログエリア ========== */
-.mobile-log-area {
-  width: 100%;
-  max-width: 100%;
-  padding: 10px 16px;
-  margin: 0 auto 16px auto;
-  background: rgba(255, 255, 255, 0.1);
-  color: #eee;
-  font-size: 14px;
-  border-radius: 12px;
-  backdrop-filter: blur(8px);
-  overflow-y: auto;
-  box-sizing: border-box;
-}
-
-/* ========== 共通ウィジェット基盤 ========== */
-.widget-wrapper,
-.weather-widget,
-.music-widget,
-.calendar-widget {
-  width: 100%;
-  max-width: 320px;
-  padding: 12px 16px;
-  box-sizing: border-box;
-  margin: 0 auto;
-}
-
-/* ========== 横並びウィジェット ========== */
+/* ========== ウィジェット横並び ========== */
 .widget-row {
   display: flex;
-  gap: 16px;
+  gap: 30px;
   width: 100%;
   padding: 0 var(--side-padding);
+  margin-top: 8px;
+  flex-shrink: 1;
   box-sizing: border-box;
-  margin-top: 24px;
+  margin-bottom: 15px;
 }
 
-/* ========== カレンダー ========== */
-.calendar-widget {
-  flex: 1;
-  min-height: 140px;
+.calendar-widget,
+.weather-widget {
+  flex: 1 1 0;
   background: rgba(255,255,255,0.05);
   border-radius: 16px;
   backdrop-filter: blur(6px);
@@ -120,85 +95,62 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
   box-sizing: border-box;
   color: #aee;
 }
 
 .calendar-header {
-  font-size: 20px;
+  font-size: 18px;
   color: #cce;
-  margin-bottom: 16px;
-  letter-spacing: 1px;
+  margin-bottom: 12px;
 }
-
 .calendar-main {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
-
 .calendar-day {
-  font-size: 72px;
+  font-size: 48px;
   font-weight: bold;
   color: #fff;
-  line-height: 1;
 }
-
 .calendar-weekday {
-  display: flex;
-  flex-direction: column;
-  font-size: 20px;
+  font-size: 16px;
   color: #9df;
-  padding-top: 8px;
-  line-height: 1.2;
 }
 
 /* ========== 天気 ========== */
-.weather-widget {
-  flex: 1;
-  min-height: 140px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 16px;
-  backdrop-filter: blur(6px);
-  box-shadow: 0 0 8px rgba(173,216,230,0.3);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 16px 20px;
-  color: #aee;
-  box-sizing: border-box;
-}
-
 .weather-info-top {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  font-size: 14px;
+  font-size: 13px;
   color: #ccc;
 }
 .location {
-  font-size: 15px;
+  font-size: 14px;
   color: #9ac;
 }
 .alert {
-  font-size: 15px;
+  font-size: 14px;
   color: rgb(174, 20, 20);
 }
 .weather-info-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 14px;
+  font-size: 13px;
+  width: 100%;
 }
 .weather-icon {
-  font-size: 35px;
+  font-size: 28px;
 }
 .weather-stats {
-  font-size: 15px;
+  font-size: 14px;
 }
 
-/* ========== プレイヤー ========== */
+/* ========== 音楽プレイヤー ========== */
 .music-widget {
   display: flex;
   flex-direction: column;
@@ -207,61 +159,56 @@
   border-radius: 16px;
   backdrop-filter: blur(6px);
   box-shadow: 0 0 8px rgba(173,216,230,0.3);
-  padding: 20px;
+  padding: 12px;
   color: #aee;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
   box-sizing: border-box;
   font-family: 'Courier New', monospace;
+  flex-shrink: 1;
 }
-
 .music-main {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
   width: 100%;
 }
-
 .jacket-placeholder {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   background: rgba(255,255,255,0.1);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(255,255,255,0.05);
-  flex-shrink: 0;
 }
-
 .track-info-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
 }
 .track-title {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
   color: #fff;
 }
 .track-artist {
-  font-size: 20px;
+  font-size: 16px;
   color: #aaa;
 }
-
 .controls {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 16px;
 }
 .play-btn {
   background: none;
   border: 1px solid #aee;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   color: #aee;
-  font-size: 18px;
-  transition: all 0.2s ease;
+  font-size: 16px;
 }
 .play-btn:hover {
   background: rgba(255,255,255,0.1);
@@ -271,15 +218,26 @@
   background: none;
   border: none;
   color: #aaa;
-  font-size: 18px;
-  transition: all 0.2s ease;
+  font-size: 16px;
 }
 .control-btn:hover {
   color: #fff;
   transform: scale(1.1);
 }
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress {
+  width: 40%;
+  height: 100%;
+  background: #aee;
+}
 
-/* ========== クラゲ ========== */
+/* ========== クラゲ背景 ========== */
 .jellyfish-container {
   position: fixed;
   inset: 0;
@@ -296,29 +254,17 @@
   animation: floatUp 30s infinite ease-in-out;
   filter: blur(3px);
 }
-.jellyfish:nth-child(1) {
-  left: 20%;
-  bottom: -60px;
-  animation-duration: 28s;
-}
-.jellyfish:nth-child(2) {
-  left: 55%;
-  bottom: -80px;
-  animation-duration: 33s;
-}
-.jellyfish:nth-child(3) {
-  left: 35%;
-  bottom: -100px;
-  animation-duration: 36s;
-  transform: scale(0.8);
-}
+.jellyfish:nth-child(1) { left: 20%; bottom: -60px; animation-duration: 28s; }
+.jellyfish:nth-child(2) { left: 55%; bottom: -80px; animation-duration: 33s; }
+.jellyfish:nth-child(3) { left: 35%; bottom: -100px; animation-duration: 36s; transform: scale(0.8); }
+
 @keyframes floatUp {
   0% { transform: translateY(0) scale(1); opacity: 0.2; }
   50% { transform: translateY(-50vh) scale(1.05); opacity: 0.5; }
   100% { transform: translateY(-100vh) scale(0.95); opacity: 0; }
 }
 
-/* ========== レスポンシブ ========== */
+/* ========== 表示切り替え ========== */
 @media screen and (max-width: 768px) {
   .mobile-home-ui {
     display: flex !important;
