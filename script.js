@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
   updateClock();
   setInterval(updateClock, 10000);
 
-  // アプリイベント（全部この中に！）
+  // アプリイベント
   document.getElementById("mobileQuotIcon")?.addEventListener("click", () => {
     window.location.href = "https://quotdict.onrender.com";
   });
@@ -52,52 +52,61 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("mobileProfileIcon")?.addEventListener("click", () => {
-    showMobileLog(logLines);
+    showMobileLog([
+      ">>> initializing...",
+      ">>> system booting sequence start",
+      ">>> neural link... 接続完了",
+      "",
+      ">>> ユーザー確認：『下川 美弥』",
+      ">>> PROFILE：FrontEnd / UI Designer",
+      "",
+      ">>> 使用技術：HTML / CSS / JS / Java",
+      ">>> 特性：インタラクション重視・情緒的UI",
+      "",
+      ">>> 最近：ノードUI + 粒子表現 + ウィンドウUI",
+      ">>> 作業中：Portfolio Interface v1.0",
+      "",
+      ">>> モード：自己紹介ログ（REPORT MODE）",
+      ">>> 状態：静かに、コードの夢を見ています",
+      ">>> LOG END",
+      ">>> システム：スリープモードへ移行",
+      ">>> タップで再起動可能です"
+    ]);
   });
 
   document.getElementById("mobileHelpIcon")?.addEventListener("click", () => {
     showMobileLog([
-      ">>> 説明モード起動中...",
-      ">>> このページは仮想デスクトップ風ポートフォリオ",
-      ">>> 各アイコンをクリックすると説明 or アプリ起動",
-      ">>> MACテーマでノード説明も表示されます",
-      ">>> 詳細はPC版を推奨します",
-      ">>> END"
+      ">>> ■ モバイルモード起動",
+      "      簡易端末 展開中...",
+      ">>> 🧭 HP → 方針・概要表示",
+      ">>> 🌐 LP → 外部リンク統合",
+      ">>> 📖 Dict → 語彙データ保管庫（試験中）",
+      ">>> 🎮 Game → 娯楽アーカイブ",
+      ">>> 👤 Me → 個体情報 表示",
+      ">>> ❓ Guide → 操作指針 提示",
+      ">>> ■ ウィジェット群",
+      "      ※実用性 不明。装飾と推定",
+      ">>> 推奨対応：無視 または 愛玩",
+      ">>> 推奨：本端末はPC環境向けに最適化",
+      ">>> 補足：開発者の趣味が深く介在",
+      ">>> END OF LOG"
     ]);
   });
 });
 function showMobileLog(lines) {
   // ログ表示用の要素を用意（あれば使う）
   let container = document.getElementById("mobileLogContainer");
-  
-  if (!container) {
-    // なければ新しく作ってbodyに追加
-    container = document.createElement("pre");
-    container.id = "mobileLogContainer";
-    container.style.position = "fixed";
-    container.style.top = "10%";
-    container.style.left = "5%";
-    container.style.width = "90%";
-    container.style.height = "80%";
-    container.style.backgroundColor = "rgba(0,0,0,0.85)";
-    container.style.color = "#aaf";
-    container.style.padding = "1rem";
-    container.style.overflowY = "auto";
-    container.style.fontFamily = "monospace";
-    container.style.fontSize = "14px";
-    container.style.borderRadius = "8px";
-    container.style.zIndex = "99999";
-    container.style.userSelect = "text";
-    document.body.appendChild(container);
-  }
-
-  // 配列の各行をまとめて表示
-  container.textContent = lines.join("\n");
-
-  // もし閉じる仕組みが欲しいなら
-  container.addEventListener("click", () => {
-    container.remove();
-  });
+    if (!container) {
+      container = document.createElement("pre");
+      container.id = "mobileLogContainer";
+      document.body.appendChild(container);
+    }
+    // 配列の各行をまとめて表示
+    container.textContent = lines.join("\n");
+    // クリックで閉じる
+    container.addEventListener("click", () => {
+      container.remove();
+    });
 }
 // ==========================
 // カレンダー
@@ -122,8 +131,6 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   `;
 });
-
-
 
 // ==========================
 // テーマ管理・切り替え処理
