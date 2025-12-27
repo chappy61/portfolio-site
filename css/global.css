@@ -1,0 +1,55 @@
+/* global.css: 変数 + テーマ共通 + body基本 */
+:root {
+  --main-side-padding: 20px;
+  --widget-max-width: 100%;
+  --side-padding: 20px;
+  --bg-dark: #0a0a0a;
+  --text-primary: #eee;
+  --text-secondary: #aee;
+  --accent-blue: #9df;
+  --warning-red: #d44;
+  --widget-bg: rgba(255, 255, 255, 0.05);
+}
+
+.win-theme,
+.mac-theme {
+  --bg-color: #121212;
+  --window-bg: #1e1e1e;
+  --header-bg: #2a2a2a;
+  --text-color: #c0c0c0;
+  --accent-color: #66ccff;
+  --shadow-color: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: var(--text-color);
+  position: relative;
+}
+
+.win-theme::before,
+.mac-theme::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}
+
+body {
+  margin: 0;
+  font-family: "Courier New", monospace, system-ui, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}

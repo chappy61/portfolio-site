@@ -1,0 +1,86 @@
+/* ========== ウィンドウヘッダーボタン ========== */
+/* ウィンドウヘッダーのスタイル */
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* FASTたちと✖を左右に分ける */
+  padding: 5px 10px;
+  background-color: var(--header-bg);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: 1px solid var(--accent-color);
+}
+.system-btn {
+  all: unset;
+  display: inline-block;
+  padding: 3px 6px;
+  margin-right: 8px;
+  font-size: 1rem;
+  font-family: "Courier New", monospace;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s, text-shadow 0.3s;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.override-btn:hover {
+  color: #e33e3e;
+  text-shadow: 0 0 6px #ff5c5c;
+}
+
+.reboot-btn:hover {
+  color: #10a4b2;
+  text-shadow: 0 0 6px #10a4b2;
+}
+
+.shutdown-btn:hover {
+  color: #06f506;
+  text-shadow: 0 0 4px #16cc16;
+}
+.system-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  font-size: 0.65rem;
+  color: #888;
+  margin-top: 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.system-btn:hover::after {
+  opacity: 1;
+}
+
+/* ホバー時に小さな説明を表示 */
+.system-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -2em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  text-shadow: 0 0 2px #000;
+}
+
+.system-btn:hover::after {
+  opacity: 1;
+}
+.log-close {
+  position: absolute; /* または fixed */
+  top: 3px;
+  right: 18px; /* 右から20px → これを増やすと左に寄る */
+  color: #ffffff77;
+  font-size: 1.2rem;
+}
+.log-close:hover {
+  color: #f51616;
+  text-shadow: 0 0 6px #ff5c5c;
+}

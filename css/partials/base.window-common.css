@@ -1,0 +1,27 @@
+/* ========== ウィンドウ共通スタイル ========== */
+/* ウィンドウの基本スタイル */
+.window {
+  position: fixed;
+  top: 90px;
+  left: 100px;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 500px;
+  max-width: 100%;
+  overflow: visible;
+  border-radius: 12px;
+  border: 1px solid var(--accent-color);
+  user-select: text;
+  background-color: var(--window-bg);
+  font-size: 0.75rem;
+  color: #ccc;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 静的ウィンドウの位置 */
+.window.static-window {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}

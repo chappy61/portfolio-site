@@ -1,0 +1,7 @@
+/* ========== 点滅テキスト ========== */
+/* 点滅テキストのアニメーション */
+.win-theme .blink,
+.mac-theme .blink {
+  animation: blink 1.2s infinite step-end;
+  color: #00c614;
+}

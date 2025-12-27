@@ -1,0 +1,268 @@
+/* layout.css: 全体レイアウト + pointer-events + overlay + ノード関連の配置 */
+.mac-theme .overlay,
+.mac-theme .window {
+  pointer-events: none;
+}
+
+.mac-theme .icon-area,
+.mac-theme .icon,
+.mac-theme .game-icon-specific {
+  pointer-events: none;
+}
+
+.win-theme .icon-area,
+.win-theme .icon,
+.win-theme .game-icon-specific {
+  pointer-events: auto;
+}
+
+.mac-theme::after,
+.mac-theme .window::after,
+.mac-theme .alert-window::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  z-index: 5;
+}
+
+.mac-only {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.mac-theme .mac-only {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.node-wrapper {
+  position: absolute;
+  left: 60%;
+  top: 200px;
+  width: 20px;
+  height: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.node-wrapper.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.node-wrapper.visible {
+  opacity: 1;
+}
+
+.node-circle {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  z-index: 100;
+}
+
+.node-wrapper.active .info-node {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.node-wrapper:hover .line {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.mac-theme .safari-node::before,
+.mac-theme .chrome-node::before,
+.mac-theme .steam-node::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 0px;
+  width: calc(90% + 5px);
+  height: calc(70% + 10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.win-theme .safari-node::before,
+.win-theme .chrome-node::before,
+.win-theme .steam-node::before {
+  content: none;
+}
+
+.toggle-content {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translate(10px, -50%);
+  width: 600px;
+  max-width: 90vw;
+  white-space: normal;
+  word-break: break-word;
+  background-color: var(--bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0px;
+  padding: 1em;
+  font-size: 0.9em;
+  color: var(--text-color);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 8px rgba(62, 203, 203, 0.435);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+
+.offset-down {
+  transform: translateY(50px);
+}
+
+.offset-down .toggle-content {
+  width: 400px;
+}
+
+.left-node {
+  left: 10%;
+}
+
+.left-node .toggle-content {
+  left: auto;
+  right: 100%;
+  margin-left: 0;
+  margin-right: 10px;
+  width: 350px;
+}
+
+.node-wrapper.active .toggle-content {
+  opacity: 1;
+  pointer-events: auto;
+  display: block;
+}
+
+.node-wrapper .toggle-content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.line {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.074);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.icon.inactive,
+.game-icon-specific.inactive {
+  pointer-events: none;
+  opacity: 0.4;
+  filter: grayscale(100%);
+  transition: opacity 0.3s, filter 0.3s;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Courier New", monospace;
+  color: #b3fffd;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+}
+
+#log-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 5, 10, 0.9);
+  color: #c1f1f5cf;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  padding: 2rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#log-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#log-output {
+  white-space: pre-wrap;
+  max-width: 800px;
+  width: 100%;
+  line-height: 1.6;
+  padding-top: 80px;
+}
+
+#profile-title {
+  position: fixed;
+  top: 20px;
+  left: 40px;
+  transform: none;
+  font-size: 3rem;
+  color: #00eaff;
+  font-family: "Courier New", monospace;
+  text-shadow: 0 0 8px #00eaff, 0 0 20px #00eaff, 0 0 30px #00eaff;
+  animation: glowFade 3s ease-in-out infinite;
+  user-select: none;
+  pointer-events: none;
+}
+
+.home-content.is-blurred {
+  filter: blur(10px);
+  opacity: 0.6;
+  transform: scale(0.985);
+  transition: filter 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.home-content {
+  transition: filter 0.25s ease, opacity 0.25s ease, transform 0.25s ease;
+}
+
+.home-content.is-blurred::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+}

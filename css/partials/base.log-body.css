@@ -1,0 +1,19 @@
+/* ========== ログボディ ========== */
+/* ログボディのスタイル */
+.win-theme .log-body,
+.mac-theme .log-body {
+  height: 100%;
+  overflow-y: auto;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* スクロールバーの非表示 */
+.win-theme .log-body::-webkit-scrollbar,
+.mac-theme .log-body::-webkit-scrollbar {
+  display: none;
+}

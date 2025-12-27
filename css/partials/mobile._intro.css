@@ -1,0 +1,11 @@
+:root {
+  --main-side-padding: 20px;
+  --widget-max-width: 100%;
+  --side-padding: 20px;
+  --bg-dark: #0a0a0a;
+  --text-primary: #eee;
+  --text-secondary: #aee;
+  --accent-blue: #9df;
+  --warning-red: #d44;
+  --widget-bg: rgba(255, 255, 255, 0.05);
+}

@@ -1,0 +1,109 @@
+/* ==========================
+   Warning D (完全隔離)
+   ========================== */
+/* Dの箱 */
+.win-theme .alert-window-d,
+.mac-theme .alert-window-d {
+  position: absolute;
+  width: 220px;
+  height: 240px;
+  padding: 0.9rem;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(200, 200, 200, 0.55);
+  color: #d7d7d7;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  line-height: 1.45;
+
+  box-shadow: 0 0 18px rgba(76, 76, 76, 0.1);
+  backdrop-filter: blur(3px);
+
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* Dヘッダー */
+.win-theme .alert-header-d,
+.mac-theme .alert-header-d {
+  opacity: 0.95;
+  margin-bottom: 0.45rem;
+}
+
+/* D本文（共通alert-bodyの影響ゼロ） */
+.win-theme .alert-body-d,
+.mac-theme .alert-body-d {
+  position: relative;
+  white-space: normal;
+  letter-spacing: 0.02em;
+  padding-top: 0.25rem;
+}
+
+/* ラベル行（擬似） */
+.win-theme .alert-body-d::before,
+.mac-theme .alert-body-d::before {
+  content: "MODULE  STACK   BUILD";
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.6;
+  letter-spacing: 0.16em;
+  margin-bottom: 0.35rem;
+}
+
+/* 診断コード風 */
+.win-theme .code-d,
+.mac-theme .code-d {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Dの点滅だけ */
+.win-theme .blink-d,
+.mac-theme .blink-d {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #00c614;
+  animation: blink 1.2s infinite step-end;
+}
+
+/* 本文は前面 */
+.win-theme .alert-body-d > *,
+.mac-theme .alert-body-d > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dの閉じるボタン（共通close-btnの影響ゼロ） */
+.win-theme .close-btn-d,
+.mac-theme .close-btn-d {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* scanアニメ */
+@keyframes warning-scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}

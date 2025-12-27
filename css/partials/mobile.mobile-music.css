@@ -1,0 +1,86 @@
+/* ========== 音楽プレイヤー ========== */
+.music-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  padding: 12px;
+  color: #aee;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  flex-shrink: 1;
+}
+.music-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+.jacket-placeholder {
+  width: 50px;
+  height: 50px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(255,255,255,0.05);
+}
+.track-info-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+.track-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+}
+.track-artist {
+  font-size: 16px;
+  color: #aaa;
+}
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.play-btn {
+  background: none;
+  border: 1px solid #aee;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  color: #aee;
+  font-size: 16px;
+}
+.play-btn:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.1);
+}
+.control-btn {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 16px;
+}
+.control-btn:hover {
+  color: #fff;
+  transform: scale(1.1);
+}
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.progress {
+  width: 40%;
+  height: 100%;
+  background: #aee;
+}

@@ -1,0 +1,224 @@
+/* ========== ログウィンドウ ========== */
+/* ログウィンドウの基本スタイル */
+.log-window {
+  background: rgba(15, 15, 15, 0.75);
+  color: #c6f7ff;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 4px #aef, 0 0 8px #0ff2;
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.command {
+  color: #f9f9f9d5;
+  font-family: "Courier New", monospace;
+}
+.profile-link {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  color: #ff5555; /* 赤系 */
+  text-decoration: none;
+  text-shadow: 0 0 4px rgba(255, 85, 85, 0.6), 0 0 8px rgba(255, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.8);
+  animation: glowFloat 3s ease-in-out infinite;
+}
+
+.profile-link.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.profile-link:hover {
+  color: #ff0000;
+  text-shadow: 0 0 6px rgba(255, 85, 85, 0.9), 0 0 16px rgba(255, 0, 0, 0.6), 0 0 24px rgba(0, 0, 0, 1);
+  transform: scale(1.05);
+}
+@keyframes glowFloat {
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(255, 85, 85, 0.6), 0 0 8px rgba(255, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255, 85, 85, 0.9), 0 0 16px rgba(255, 0, 0, 0.7), 0 0 24px rgba(0, 0, 0, 1);
+    transform: translateY(-0.1em);
+  }
+}
+
+.boot-log {
+  font-family: "Courier New", monospace;
+  white-space: pre;
+  line-height: 1.4;
+  overflow-y: auto;
+  max-height: 100%;
+}
+/* ウィンドウ内いっぱい使う */
+.game-archive {
+  height: calc(100% - 40px);
+  padding: 18px 22px;
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+/* 1作品（左アイコン・右情報） */
+.game-row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  padding: 20px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 左アイコン：大きめ主役 */
+.game-icon {
+  width: 86px;
+  height: 86px;
+  border-radius: 18px;
+
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+/* 左アイコンの“ノード感”リング */
+.game-row::before {
+  content: "";
+  position: absolute;
+  left: 38px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.55);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.22);
+  z-index: 1;
+}
+
+/* ノードから情報へ配線（横線） */
+.game-row::after {
+  content: "";
+  position: absolute;
+  left: 58px;
+  right: 24px;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+/* 右側テキストは線より前に出す */
+.game-info,
+.game-title,
+.game-chip,
+.game-desc {
+  position: relative;
+  z-index: 2;
+}
+
+/* タイトル行 */
+.game-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* ↵ LAUNCH 表示 */
+.game-top::after {
+  content: "↵ LAUNCH";
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: rgba(0, 255, 255, 0.6);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+/* 行ホバー時だけ出す */
+.game-row:hover .game-top::after {
+  opacity: 0.65;
+  transform: translateX(0);
+}
+/* タイトル（字体はそのまま活かす想定） */
+.game-title {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+/* 3h/JS チップ */
+.game-chip {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0.9;
+}
+
+/* 説明 1行 */
+.game-desc {
+  margin-top: 6px;
+  font-size: 0.84rem;
+  opacity: 0.78;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* hoverで通電 */
+.game-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.game-row:hover::after {
+  background: rgba(0, 255, 255, 0.28);
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.2);
+}
+.game-row:hover .game-desc {
+  opacity: 0.95;
+}
+.game-row:hover .game-icon {
+  transform: scale(1.03);
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.2);
+}
+/* アイコン：通常 */
+.game-icon {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  transform-origin: center;
+}
+
+/* ✅ “アイコンに乗った時だけ” もう一段強く */
+.game-icon:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 32px rgba(0, 255, 255, 0.32);
+}
+
+/* ✅ 行ホバー中も少しだけ主役化（ただしアイコンhoverの方が強い） */
+.game-row:hover .game-icon {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.22);
+}
+.game-row {
+  cursor: default;
+}
+.game-icon {
+  cursor: pointer;
+}

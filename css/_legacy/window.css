@@ -1,0 +1,824 @@
+/* ========== ログウィンドウ ========== */
+/* ログウィンドウの基本スタイル */
+.log-window {
+  background: rgba(15, 15, 15, 0.75);
+  color: #c6f7ff;
+  border: 1px solid rgba(0, 255, 255, 0.4);
+  text-shadow: 0 0 4px #aef, 0 0 8px #0ff2;
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  max-height: 60vh;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.command {
+  color: #f9f9f9d5;
+  font-family: "Courier New", monospace;
+}
+.profile-link {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  pointer-events: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  color: #ff5555; /* 赤系 */
+  text-decoration: none;
+  text-shadow: 0 0 4px rgba(255, 85, 85, 0.6), 0 0 8px rgba(255, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.8);
+  animation: glowFloat 3s ease-in-out infinite;
+}
+
+.profile-link.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.profile-link:hover {
+  color: #ff0000;
+  text-shadow: 0 0 6px rgba(255, 85, 85, 0.9), 0 0 16px rgba(255, 0, 0, 0.6), 0 0 24px rgba(0, 0, 0, 1);
+  transform: scale(1.05);
+}
+@keyframes glowFloat {
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(255, 85, 85, 0.6), 0 0 8px rgba(255, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255, 85, 85, 0.9), 0 0 16px rgba(255, 0, 0, 0.7), 0 0 24px rgba(0, 0, 0, 1);
+    transform: translateY(-0.1em);
+  }
+}
+
+.boot-log {
+  font-family: "Courier New", monospace;
+  white-space: pre;
+  line-height: 1.4;
+  overflow-y: auto;
+  max-height: 100%;
+}
+/* ウィンドウ内いっぱい使う */
+.game-archive {
+  height: calc(100% - 40px);
+  padding: 18px 22px;
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+/* 1作品（左アイコン・右情報） */
+.game-row {
+  display: grid;
+  grid-template-columns: 92px 1fr;
+  align-items: center;
+  gap: 18px;
+  text-decoration: none;
+  color: inherit;
+  padding: 20px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 左アイコン：大きめ主役 */
+.game-icon {
+  width: 86px;
+  height: 86px;
+  border-radius: 18px;
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.18);
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+
+/* 左アイコンの“ノード感”リング */
+.game-row::before {
+  content: "";
+  position: absolute;
+  left: 38px;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.55);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.22);
+  z-index: 1;
+}
+
+/* ノードから情報へ配線（横線） */
+.game-row::after {
+  content: "";
+  position: absolute;
+  left: 58px;
+  right: 24px;
+  top: 50%;
+  height: 1px;
+  transform: translateY(-50%);
+  background: rgba(0, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+/* 右側テキストは線より前に出す */
+.game-info,
+.game-title,
+.game-chip,
+.game-desc {
+  position: relative;
+  z-index: 2;
+}
+
+/* タイトル行 */
+.game-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* ↵ LAUNCH 表示 */
+.game-top::after {
+  content: "↵ LAUNCH";
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  color: rgba(0, 255, 255, 0.6);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  white-space: nowrap;
+}
+
+/* 行ホバー時だけ出す */
+.game-row:hover .game-top::after {
+  opacity: 0.65;
+  transform: translateX(0);
+}
+/* タイトル（字体はそのまま活かす想定） */
+.game-title {
+  font-size: 1.05rem;
+  letter-spacing: 0.08em;
+}
+
+/* 3h/JS チップ */
+.game-chip {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.04);
+  opacity: 0.9;
+}
+
+/* 説明 1行 */
+.game-desc {
+  margin-top: 6px;
+  font-size: 0.84rem;
+  opacity: 0.78;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* hoverで通電 */
+.game-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.game-row:hover::after {
+  background: rgba(0, 255, 255, 0.28);
+  box-shadow: 0 0 14px rgba(0, 255, 255, 0.2);
+}
+.game-row:hover .game-desc {
+  opacity: 0.95;
+}
+.game-row:hover .game-icon {
+  transform: scale(1.03);
+  box-shadow: 0 0 22px rgba(0, 255, 255, 0.2);
+}
+/* アイコン：通常 */
+.game-icon {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, filter 0.18s ease;
+  transform-origin: center;
+}
+
+/* ✅ “アイコンに乗った時だけ” もう一段強く */
+.game-icon:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 32px rgba(0, 255, 255, 0.32);
+}
+
+/* ✅ 行ホバー中も少しだけ主役化（ただしアイコンhoverの方が強い） */
+.game-row:hover .game-icon {
+  transform: scale(1.03);
+  box-shadow: 0 0 24px rgba(0, 255, 255, 0.22);
+}
+.game-row {
+  cursor: default;
+}
+.game-icon {
+  cursor: pointer;
+}
+
+/* ========== モーダルウィンドウ ========== */
+/* モーダルの基本スタイル */
+.modal {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== ブートログ ========== */
+/* ブートログの基本スタイル */
+.boot-log {
+  font-size: 1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  padding: 1rem 2rem 2rem 2rem;
+  max-width: 90%;
+}
+/* ========== 自己紹介 ========== */
+/* オーバーレイ全体 */
+#log-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(5, 5, 10, 0.9);
+  color: #c1f1f5cf;
+  font-family: "Courier New", monospace;
+  font-size: 1rem;
+  padding: 2rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* 表示時に有効化 */
+#log-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ログ本文 */
+#log-output {
+  white-space: pre-wrap;
+  max-width: 800px;
+  width: 100%;
+  line-height: 1.6;
+  padding-top: 80px;
+}
+
+/* カーソル */
+.cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#profile-title {
+  position: fixed;
+  top: 20px; /* 上から少し余白 */
+  left: 40px; /* 左寄せに変更 */
+  transform: none; /* 中央寄せ解除 */
+  font-size: 3rem;
+  color: #00eaff;
+  font-family: "Courier New", monospace;
+  text-shadow: 0 0 8px #00eaff, 0 0 20px #00eaff, 0 0 30px #00eaff;
+  animation: glowFade 3s ease-in-out infinite;
+  user-select: none;
+  pointer-events: none;
+}
+
+@keyframes glowFade {
+  0%,
+  100% {
+    opacity: 0.6;
+    text-shadow: 0 0 4px #00eaff, 0 0 15px #00eaff, 0 0 30px #00eaff;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px #00eaff, 0 0 25px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff;
+  }
+}
+
+/* ========== ウィンドウボディ ========== */
+/* ウィンドウボディのレイアウト（中央揃え） */
+.window-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+  height: calc(100% - 40px);
+}
+
+/* モニタータイトル */
+.monitor-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  color: #00ffffa6;
+}
+
+/* モニターライン */
+.monitor-line {
+  margin-bottom: 0.4em;
+  white-space: pre;
+}
+
+/* ========== ウィンドウ共通スタイル ========== */
+/* ウィンドウの基本スタイル */
+.window {
+  position: fixed;
+  top: 90px;
+  left: 100px;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  height: 500px;
+  max-width: 100%;
+  overflow: visible;
+  border-radius: 12px;
+  border: 1px solid var(--accent-color);
+  user-select: text;
+  background-color: var(--window-bg);
+  font-size: 0.75rem;
+  color: #ccc;
+  transition: opacity 0.15s cubic-bezier(0.4, 0, 0.2, 1), transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 静的ウィンドウの位置 */
+.window.static-window {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+/* ========== ウィンドウヘッダーボタン ========== */
+/* ウィンドウヘッダーのスタイル */
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* FASTたちと✖を左右に分ける */
+  padding: 5px 10px;
+  background-color: var(--header-bg);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border-bottom: 1px solid var(--accent-color);
+}
+.system-btn {
+  all: unset;
+  display: inline-block;
+  padding: 3px 6px;
+  margin-right: 8px;
+  font-size: 1rem;
+  font-family: "Courier New", monospace;
+  color: #bbb;
+  cursor: pointer;
+  transition: color 0.3s, text-shadow 0.3s;
+  letter-spacing: 0.5px;
+  position: relative;
+}
+
+.override-btn:hover {
+  color: #e33e3e;
+  text-shadow: 0 0 6px #ff5c5c;
+}
+
+.reboot-btn:hover {
+  color: #10a4b2;
+  text-shadow: 0 0 6px #10a4b2;
+}
+
+.shutdown-btn:hover {
+  color: #06f506;
+  text-shadow: 0 0 4px #16cc16;
+}
+.system-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  font-size: 0.65rem;
+  color: #888;
+  margin-top: 3px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.system-btn:hover::after {
+  opacity: 1;
+}
+
+/* ホバー時に小さな説明を表示 */
+.system-btn::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -2em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: transparent;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 0;
+  opacity: 0.8;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+  text-shadow: 0 0 2px #000;
+}
+
+.system-btn:hover::after {
+  opacity: 1;
+}
+.log-close {
+  position: absolute; /* または fixed */
+  top: 3px;
+  right: 18px; /* 右から20px → これを増やすと左に寄る */
+  color: #ffffff77;
+  font-size: 1.2rem;
+}
+.log-close:hover {
+  color: #f51616;
+  text-shadow: 0 0 6px #ff5c5c;
+}
+/* ========== 警告ウィンドウ ========== */
+/* 警告ウィンドウのスタイル */
+.win-theme .alert-window,
+.mac-theme .alert-window {
+  position: absolute;
+  width: 250px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #aaa;
+  color: #ccc;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(76, 76, 76, 0.033);
+  backdrop-filter: blur(3px);
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* 警告ウィンドウのボディ */
+.win-theme .alert-body,
+.mac-theme .alert-body {
+  height: 120%;
+  overflow: hidden;
+}
+
+/* 警告ウィンドウAの位置 */
+.win-theme .warning-a,
+.mac-theme .warning-a {
+  bottom: 5rem;
+  right: -22%;
+}
+
+/* 警告ウィンドウBの位置 */
+.win-theme .warning-b,
+.mac-theme .warning-b {
+  bottom: -3rem;
+  right: -13%;
+  z-index: 9;
+}
+
+/* 警告ウィンドウC（ステッカー風） */
+.win-theme .warning-c,
+.mac-theme .warning-c {
+  bottom: -3rem;
+  left: -12rem;
+  z-index: 9;
+  width: 180px;
+  height: 200px;
+  overflow: hidden;
+}
+
+/* 警告ウィンドウDの位置 */
+.win-theme .warning-d,
+.mac-theme .warning-d {
+  bottom: 6rem;
+  right: 10%;
+  z-index: 10;
+}
+
+/* ==========================
+   Warning Window D 
+   ========================== */
+
+/* ==========================
+   Warning D (完全隔離)
+   ========================== */
+
+/* Dの箱 */
+.win-theme .alert-window-d,
+.mac-theme .alert-window-d {
+  position: absolute;
+  width: 220px;
+  height: 240px;
+  padding: 0.9rem;
+  box-sizing: border-box;
+
+  background: rgba(0, 0, 0, 0.72);
+  border: 1px solid rgba(200, 200, 200, 0.55);
+  color: #d7d7d7;
+
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  line-height: 1.45;
+
+  box-shadow: 0 0 18px rgba(76, 76, 76, 0.1);
+  backdrop-filter: blur(3px);
+
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* Dヘッダー */
+.win-theme .alert-header-d,
+.mac-theme .alert-header-d {
+  opacity: 0.95;
+  margin-bottom: 0.45rem;
+}
+
+/* D本文（共通alert-bodyの影響ゼロ） */
+.win-theme .alert-body-d,
+.mac-theme .alert-body-d {
+  position: relative;
+  white-space: normal;
+  letter-spacing: 0.02em;
+  padding-top: 0.25rem;
+}
+
+/* ラベル行（擬似） */
+.win-theme .alert-body-d::before,
+.mac-theme .alert-body-d::before {
+  content: "MODULE  STACK   BUILD";
+  display: block;
+  font-size: 0.65rem;
+  opacity: 0.6;
+  letter-spacing: 0.16em;
+  margin-bottom: 0.35rem;
+}
+
+/* 診断コード風 */
+.win-theme .code-d,
+.mac-theme .code-d {
+  display: inline-block;
+  margin-top: 0.25rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* Dの点滅だけ */
+.win-theme .blink-d,
+.mac-theme .blink-d {
+  display: inline-block;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: #00c614;
+  animation: blink 1.2s infinite step-end;
+}
+
+/* 本文は前面 */
+.win-theme .alert-body-d > *,
+.mac-theme .alert-body-d > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Dの閉じるボタン（共通close-btnの影響ゼロ） */
+.win-theme .close-btn-d,
+.mac-theme .close-btn-d {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* scanアニメ */
+@keyframes warning-scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+/* ========== ログボディ ========== */
+/* ログボディのスタイル */
+.win-theme .log-body,
+.mac-theme .log-body {
+  height: 100%;
+  overflow-y: auto;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* スクロールバーの非表示 */
+.win-theme .log-body::-webkit-scrollbar,
+.mac-theme .log-body::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========== 閉じるボタン ========== */
+/* 閉じるボタンのスタイル */
+.win-theme .close-btn,
+.mac-theme .close-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* ========== 点滅テキスト ========== */
+/* 点滅テキストのアニメーション */
+.win-theme .blink,
+.mac-theme .blink {
+  animation: blink 1.2s infinite step-end;
+  color: #00c614;
+}
+
+/* ========== アニメーション ========== */
+/* フェードインアニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 点滅アニメーション */
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.4;
+  }
+}
+
+/* ブリンクアニメーション */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+/* ==========================
+   Pacman Loader（装置）
+   ========================== */
+.pacman-loader {
+  position: absolute;
+  top: 8px; /* ヘッダー内 or ウィンドウ上部に沿わせる */
+  left: 18px; /* 左から占領開始 */
+  width: 180px; /* ← 今のサイズそのまま */
+  height: 24px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* パックマン本体 */
+.pacman-loader::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #ffd100;
+  clip-path: polygon(0% 0%, 100% 0%, 68% 50%, 100% 100%, 0% 100%);
+  animation: pacman-move 6s linear infinite, pacman-chomp 0.5s ease-in-out infinite;
+}
+
+/* 食べられるブロックたち */
+.pacman-loader::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  width: 6px;
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  box-shadow: 24px 0 0 #ff4bd6, 48px 0 0 #7bff3a, 72px 0 0 #ffa600;
+  animation: pacman-dots 6s linear infinite;
+}
+
+/* ゆっくり横断 */
+@keyframes pacman-move {
+  0% {
+    left: 0;
+  }
+  45% {
+    left: 140px;
+  }
+  50% {
+    left: 140px;
+  }
+  95% {
+    left: 0;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+/* ぱくぱく */
+@keyframes pacman-chomp {
+  0%,
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 68% 50%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 100% 18%, 56% 50%, 100% 82%, 0% 100%);
+  }
+}
+
+/* ブロックが食べられて復活する */
+@keyframes pacman-dots {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  } /* 食べられた */
+  60% {
+    opacity: 1;
+  } /* 復活 */
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 優しさ */
+@media (prefers-reduced-motion: reduce) {
+  .pacman-loader::before,
+  .pacman-loader::after {
+    animation: none;
+  }
+}
+/* 1) 既存のborder-bottomを無効化（線だけ差し替え） */
+.game-archive .window-header {
+  border-bottom: none; /* ←ここがキモ */
+  position: relative; /* 疑似要素の土台 */
+}
+
+/* 2) フル幅の下線を描く（左右ぴったり） */
+.game-archive .window-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent-color);
+  opacity: 0.9; /* 好みで */
+}

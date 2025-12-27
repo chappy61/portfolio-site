@@ -1,0 +1,13 @@
+/* effects.css: particles + effects */
+/* ========== パーティクルエフェクト ========== */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 220, 240, 0.8);
+  box-shadow: 0 0 6px rgba(255, 220, 240, 0.6);
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 1.5s ease-out;
+}
+

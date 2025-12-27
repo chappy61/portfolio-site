@@ -1,0 +1,15 @@
+/* ========== 共通スタイル ========== */
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace, system-ui, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}

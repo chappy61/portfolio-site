@@ -1,0 +1,150 @@
+/* ========== ゲームアイコン専用スタイル ========== */
+/* Steamアイコンのスタイル */
+.icon-steam {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1b2838;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.4), 0 0 6px rgba(102, 192, 244, 0.3);
+  animation: shimmer 6s ease-in-out infinite;
+  transition: transform 0.8s ease;
+  transform: rotate(0deg);
+  overflow: visible; /* アームがはみ出せるように */
+}
+
+/* 中央ジョイント（メイン） */
+.joint.main-joint {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white; /* 外丸の色 */
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 中の丸（◎の中心） */
+.joint.main-joint::before {
+  content: "";
+  position: absolute;
+  top: 48%;
+  left: 51.5%;
+  width: 7px;
+  height: 7px;
+  background: white; /* 内丸の色 */
+  border: 2px solid #1b2838; /* 内丸の黒フチ */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* アーム */
+.steam-arm {
+  position: absolute;
+  width: 26px;
+  height: 8px;
+  background: white;
+  top: 65%;
+  left: 50%;
+  transform-origin: left center;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  z-index: 1;
+  border-radius: 5px 2px 2px 5px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
+  box-shadow: 0 0 4px rgba(102, 192, 244, 0.6);
+}
+
+/* 先端ジョイント（小） */
+.joint.sub-joint {
+  position: absolute;
+  top: 63%;
+  left: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white; /* 外丸の色 */
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+/* 中の丸（◎の中心） */
+.joint.sub-joint::before {
+  content: "";
+  position: absolute;
+  top: 50.5%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  background: white; /* 内丸の色 */
+  border: 2px solid #1b2838; /* 内丸の黒フチ */
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+.steam-arm-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: 28% 63%; /* ← サブジョイント位置に合わせる */
+  transition: transform 0.3s ease;
+  pointer-events: none; /* ← ラッパー自体はクリック不要ならこれで安心 */
+}
+
+.icon-steam:hover .steam-arm-wrapper {
+  animation: arm-swing 1.2s ease-in-out;
+}
+
+@keyframes arm-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-12deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+/* ナチュラルスイング用アニメーション */
+@keyframes arm-natural-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  45% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  90% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.icon-steam:hover .steam-arm-wrapper.natural-swing {
+  animation: arm-natural-swing 1.5s ease-in-out infinite;
+}

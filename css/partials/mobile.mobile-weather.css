@@ -1,0 +1,29 @@
+/* ========== 天気 ========== */
+.weather-info-top {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #ccc;
+}
+.location {
+  font-size: 14px;
+  color: #9ac;
+}
+.alert {
+  font-size: 14px;
+  color: rgb(174, 20, 20);
+}
+.weather-info-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  width: 100%;
+}
+.weather-icon {
+  font-size: 28px;
+}
+.weather-stats {
+  font-size: 14px;
+}

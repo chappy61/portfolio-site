@@ -1,0 +1,9 @@
+/* ========== ステータスバー ========== */
+.status-bar {
+  width: 100%;
+  padding: 6px 12px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  flex-shrink: 0;
+}

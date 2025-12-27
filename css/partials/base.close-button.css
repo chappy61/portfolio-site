@@ -1,0 +1,15 @@
+/* ========== 閉じるボタン ========== */
+/* 閉じるボタンのスタイル */
+.win-theme .close-btn,
+.mac-theme .close-btn {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 0.9rem;
+  cursor: default;
+  pointer-events: none;
+  opacity: 0.5;
+}

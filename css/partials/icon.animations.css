@@ -1,0 +1,35 @@
+/* ========== アニメーション ========== */
+/* Chromeアイコンの点滅アニメーション */
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* 回転アニメーション */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* ゲームギャラリー用画像アイコン */
+.game-icon-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain; /* はみ出さない */
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(180, 220, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.game-icon-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(180, 220, 255, 0.45);
+}

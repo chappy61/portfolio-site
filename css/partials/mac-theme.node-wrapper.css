@@ -1,0 +1,53 @@
+/* ========== ノードラッパー ========== */
+/* ノードラッパーの基本スタイル */
+.node-wrapper {
+  position: absolute;
+  left: 60%;
+  top: 200px;
+  width: 20px;
+  height: 20px;
+  z-index: 1000;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* アクティブ状態のノードラッパー */
+.node-wrapper.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 可視状態のノードラッパー */
+.node-wrapper.visible {
+  opacity: 1;
+}
+
+/* ノードの円形スタイル */
+.node-circle {
+  width: 14px;
+  height: 14px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  z-index: 100;
+}
+
+/* アクティブ時の情報ノード */
+.node-wrapper.active .info-node {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+/* ノードラッパーのホバー時の線 */
+.node-wrapper:hover .line {
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}

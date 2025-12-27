@@ -1,0 +1,7 @@
+/* ========== Winテーマ専用スタイル ========== */
+/* Winテーマでのアイコンエリアとアイコンのクリック有効化 */
+.win-theme .icon-area,
+.win-theme .icon,
+.win-theme .game-icon-specific {
+  pointer-events: auto;
+}

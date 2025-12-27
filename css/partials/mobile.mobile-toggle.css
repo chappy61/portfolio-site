@@ -1,0 +1,21 @@
+/* ========== 表示切り替え ========== */
+@media screen and (max-width: 768px) {
+  .mobile-home-ui {
+    display: flex !important;
+  }
+  .mobile-home-ui.hidden {
+    display: flex !important;
+  }
+  .content, .viewport {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 769px) {
+  .mobile-home-ui {
+    display: none !important;
+  }
+  .content, .viewport {
+    display: block !important;
+    opacity: 1 !important;
+  }
+}

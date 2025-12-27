@@ -1,0 +1,8 @@
+/* AUTO-SPLIT: icon.css は partials に分割しました。
+   見た目を壊さないため、読み込み順は維持しています。 */
+
+@import url("./partials/icon.icon-area.css");
+@import url("./partials/icon.game-icons.css");
+@import url("./partials/icon.book-icons.css");
+@import url("./partials/icon.browser-icons.css");
+@import url("./partials/icon.animations.css");

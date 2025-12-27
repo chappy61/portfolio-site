@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link href="css/global.css" rel="stylesheet" />
+    <link href="css/layout.css" rel="stylesheet" />
+    <link href="css/components.css" rel="stylesheet" />
+    <link href="css/animations.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/mobile.css" rel="stylesheet" />
+    <link href="css/index.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Share+Tech+Mono&display=swap"
+      rel="stylesheet" />
+  </head>
+  <body class="page-index win-theme">
+    <!-- partials mount -->
+
+    <div id="partial-mobile"></div>
+    <!-- ========================== -->
+    <!-- ロード -->
+    <!-- ========================== -->
+    <div id="loading-overlay">
+      <div class="loading-text">Now Loading...</div>
+    </div>
+
+    <div class="content">
+      <div class="viewport">
+        <!-- ========================== -->
+        <!-- 切り替え -->
+        <!-- ========================== -->
+        <div class="theme-switcher">
+          <button id="themeToggleBtn">
+            <div class="menu-icon">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </button>
+        </div>
+        <div class="icon-area icon-area-l">
+          <!-- Mailアイコン -->
+          <div class="icon mail-node" id="icon-mail">
+            <a class="mail-icon-open-wide" href="#">
+              <div class="mail-icon-cover"></div>
+            </a>
+            <span class="icon-label">CONTACT</span>
+          </div>
+          <!-- Safariアイコン -->
+          <div class="icon safari-node" id="icon-safari">
+            <a data-app="IntroLog" href="#">
+              <div class="icon-safari"></div>
+            </a>
+            <span class="icon-label icon-label-safari">HP[DEMO]</span>
+          </div>
+          <!-- Chromeアイコン -->
+          <div class="icon chrome-node" id="icon-chrome">
+            <a data-app="IntroLog" href="#">
+              <div class="icon-chrome"></div>
+            </a>
+            <span class="icon-label icon-label-chrome">LP[DEMO]</span>
+          </div>
+        </div>
+        <!-- Steamアイコン -->
+        <div class="icon-area icon-area-r">
+          <div class="icon game-icon steam-node" id="icon-steam">
+            <a data-app="SteamApp" data-link="true" href="game-gallery.html">
+              <div class="icon-steam">
+                <div class="steam-arm-wrapper natural-swing">
+                  <div class="joint main-joint"></div>
+                  <div class="steam-arm"></div>
+                  <div class="joint sub-joint"></div>
+                </div>
+              </div>
+            </a>
+            <span class="icon-label icon-label-steam">GAME</span>
+          </div>
+        </div>
+        <!-- ========================== -->
+        <!-- トグル -->
+        <!-- ========================== -->
+        <div class="node-wrapper mac-only" data-target="#icon-quotdict">
+          <div class="toggle-content">
+            ■ QuotDict ■
+            <br />
+            ■ Flask（Python） □ 約2週間（実働10日）
+            <br />
+            ■ コードや引用を保存できるWeb辞書ツール □ 初めてGitHub・Renderで公開しました。
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="node-wrapper mac-only" data-target="#icon-safari">
+          <div class="toggle-content">
+            ■ HP(模擬) ■
+            <br />
+            ■ Flask（Python） □ 約//週間（実働//日）
+            <br />
+            ■ // □ //
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="node-wrapper mac-only" data-target="#icon-chrome">
+          <div class="toggle-content">
+            ■ LP(模擬) ■
+            <br />
+            ■ Flask（Python） □ 約//週間（実働//日）
+            <br />
+            ■ // □ //
+          </div>
+          <div class="line"></div>
+        </div>
+        <div class="node-wrapper mac-only offset-down" data-target="#warning-c">
+          <div class="toggle-content">
+            ■ System Status ■
+            <br />
+            ■ 異常ログ検出中：Phase-3 Threshold Over
+            <br />
+            ■ 複数アラート連携済 - LayerSync ON
+            <br />
+            ■ DataTrace: Re:Trace[1/∞]
+            <br />
+            → ※この情報は演出目的のダミーです
+          </div>
+          <div class="line" data-source=".warning-a"></div>
+          <div class="line" data-source=".warning-b"></div>
+          <div class="line" data-source=".warning-c"></div>
+        </div>
+        <div class="node-wrapper mac-only left-node" data-target="#icon-steam">
+          <div class="toggle-content">
+            ■ game ■
+            <br />
+            ■ Flask（Python） □ 約//週間（実働//日）
+            <br />
+            ■ // □ //
+          </div>
+          <div class="line"></div>
+        </div>
+        <!-- ========================== -->
+        <!-- ウィンドウ風自己紹介 -->
+        <!-- ========================== -->
+        <div class="window static-window">
+          <div class="window-header">
+            <div class="system-controls">
+              <button class="system-btn override-btn" data-tooltip="早送り">OVERRIDE »</button>
+              <button class="system-btn reboot-btn" data-tooltip="最初から">REBOOT</button>
+              <button class="system-btn shutdown-btn" data-tooltip="全文表示">FORCE DUMP</button>
+            </div>
+            <span class="log-close">✖</span>
+          </div>
+          <div class="boot-screen" id="boot-screen">
+            <pre class="boot-log"></pre>
+          </div>
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ A -->
+          <!-- ========================== -->
+          <div class="alert-window warning-a">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ SYSTEM ERROR ]</div>
+            <div class="alert-body">
+              Memory access violation.
+              <br />
+              Code:
+              <code>0x001D9</code>
+              <br />
+              Status:
+              <span class="blink">CRITICAL</span>
+            </div>
+          </div>
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ B -->
+          <!-- ========================== -->
+          <div class="alert-window warning-b">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ PROCESS FAILURE ]</div>
+            <div class="alert-body">
+              Subsystem communication lost.
+              <br />
+              Code:
+              <code>0x003EE</code>
+              <br />
+              Status:
+              <span class="blink">ERROR</span>
+            </div>
+          </div>
+          <!-- ========================== -->
+          <!-- ログ風ウィンドウ -->
+          <!-- ========================== -->
+          <div class="alert-window warning-c" id="warning-c">
+            <button class="close-btn">✖</button>
+            <div class="alert-header">[ ANALYSIS LOG ]</div>
+            <div class="alert-body">
+              <div class="log-body" id="logBody">
+                <div class="cursor" id="cursor">▍</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--window static-window-->
+        <!-- 自己紹介ログのオーバーレイ ウィンドウ内に入れない-->
+        <div class="hidden" id="log-overlay">
+          <div id="profile-title">My Profile</div>
+          <pre id="log-output"></pre>
+        </div>
+      </div>
+      <!--viewport-->
+    </div>
+    <!--content-->
+    <script src="js/global.js" type="module"></script>
+    <script src="js/index.js" type="module"></script>
+  </body>
+</html>

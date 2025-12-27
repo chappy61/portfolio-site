@@ -1,0 +1,58 @@
+/* ========== アイコンエリア ========== */
+/* アイコンエリアの配置 */
+.icon-area-l {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.icon-area-r {
+  position: absolute;
+  right: 40px;
+  top: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* 個々のアイコンのスタイル */
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 72px;
+  height: 90px;
+  margin: 8px;
+  text-align: center;
+  user-select: none;
+  position: relative;
+  z-index: 15;
+}
+
+/* アイコンのリンク */
+.icon > a {
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: relative;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* アイコンラベルのスタイル */
+.icon-label {
+  font-size: 11px;
+  margin-top: 7px;
+  color: var(--text-color, #333);
+  white-space: nowrap;
+  text-align: center;
+}
+
+/* アイコンのホバーエフェクト */
+.icon:hover {
+  transform: scale(1.05);
+}

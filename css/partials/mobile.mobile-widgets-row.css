@@ -1,0 +1,47 @@
+/* ========== ウィジェット横並び ========== */
+.widget-row {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  padding: 0 var(--side-padding);
+  margin-top: 8px;
+  flex-shrink: 1;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.calendar-widget,
+.weather-widget {
+  flex: 1 1 0;
+  background: rgba(255,255,255,0.05);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 0 8px rgba(173,216,230,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #aee;
+}
+
+.calendar-header {
+  font-size: 18px;
+  color: #cce;
+  margin-bottom: 12px;
+}
+.calendar-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.calendar-day {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+}
+.calendar-weekday {
+  font-size: 16px;
+  color: #9df;
+}

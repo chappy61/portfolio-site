@@ -1,0 +1,132 @@
+<!-- ========================== -->
+<!-- スマホ用待ち受けUI（PC非表示） -->
+<!-- ========================== -->
+<div class="mobile-home-ui hidden" id="mobileHomeUI">
+  <div class="status-bar">
+    <span class="mobile-time" id="mobileTime">23:58</span>
+    <span class="mobile-battery">📶　🔋83%</span>
+  </div>
+  <div class="home-content" id="homeContent">
+    <div class="app-grid top-icons">
+      <div class="app-icon" id="mobileQuotIcon">
+        📖
+        <span class="label">Dict</span>
+      </div>
+      <div class="app-icon" id="mobileHpIcon">
+        🧭
+        <span class="label">HP</span>
+      </div>
+      <div class="app-icon" id="mobileLpIcon">
+        🌐
+        <span class="label">LP</span>
+      </div>
+      <div class="app-icon" id="mobileGameIcon">
+        🎮
+        <span class="label">Game</span>
+      </div>
+      <div class="app-icon" id="mobileProfileIcon">
+        👤
+        <span class="label">Me</span>
+      </div>
+      <div class="app-icon" id="mobileHelpIcon">
+        ❓
+        <span class="label">Guide</span>
+      </div>
+    </div>
+    <div class="widget-row">
+      <div class="calendar-widget" id="calendarWidget"></div>
+      <div class="weather-widget">
+        <div class="weather-info-top">
+          <div class="location">🌍Earth: ■■■</div>
+          <div class="alert">⚠ MIST ALERT</div>
+        </div>
+        <div class="weather-info-bottom">
+          <div class="weather-icon">🌫️</div>
+          <div class="weather-stats">
+            16.4℃
+            <br />
+            湿度:83%
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="music-widget">
+      <div class="music-main">
+        <div class="jacket-placeholder"></div>
+        <div class="track-info-text">
+          <div class="track-title">Vox Pulchra</div>
+          <div class="track-artist">Beauvoir</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="control-btn">≪</button>
+        <button class="play-btn">▶</button>
+        <button class="control-btn">≫</button>
+      </div>
+      <div class="progress-bar"><div class="progress"></div></div>
+    </div>
+    <div class="jellyfish-container">
+      <div class="jellyfish"></div>
+      <div class="jellyfish delay"></div>
+      <div class="jellyfish smaller"></div>
+    </div>
+  </div>
+  <div class="overlay-layer" id="overlayLayer">
+    <!-- Game フォルダ（iPhone風） -->
+    <div class="folder-sheet hidden" id="gameFolderSheet" role="dialog" aria-label="Game folder">
+      <div class="folder-header">
+        <span class="folder-title">Game</span>
+        <button class="folder-close" id="closeGameFolder" aria-label="Close">×</button>
+      </div>
+
+      <!-- 上：iPhoneのフォルダっぽいアイコン並び -->
+      <div class="folder-icons">
+        <a class="folder-icon" href="https://chappy61.github.io/mini-game/" target="_blank" rel="noopener">
+          <img src="images/mini-game.png" alt="Mini Game" />
+        </a>
+        <a class="folder-icon" href="https://chappy61.github.io/color/" target="_blank" rel="noopener">
+          <img src="images/color.png" alt="Color Game" />
+        </a>
+        <a class="folder-icon" href="https://magic-doodle.onrender.com/" target="_blank" rel="noopener noreferrer">
+          <img src="images/magic-doodle.png" alt="Magic Doodle" />
+        </a>
+      </div>
+
+      <!-- 下：ポートフォリオとして“説明” -->
+      <div class="folder-cards">
+        <a class="game-card" href="https://chappy61.github.io/mini-game/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-left">
+              <img src="images/mini-game.png" class="card-mini-icon" />
+              <span class="card-title">Mini Game</span>
+            </div>
+            <span class="card-chip">3h / JS</span>
+          </div>
+          <div class="card-desc">ポートフォリオ用の簡単なシューティングゲーム</div>
+        </a>
+        <a class="game-card" href="https://chappy61.github.io/color/" target="_blank" rel="noopener">
+          <div class="card-top">
+            <div class="card-left">
+              <img src="images/color.png" class="card-mini-icon" />
+              <span class="card-title">Color Game</span>
+            </div>
+            <span class="card-chip">3h / PWA</span>
+          </div>
+          <div class="card-desc">
+            子どもの「やりたい！」から制作。好きそうな効果音とテンポ感にこだわり、ボーナスステージも実装。
+          </div>
+        </a>
+        <a class="game-card" href="https://magic-doodle.onrender.com/" target="_blank" rel="noopener noreferrer">
+          <div class="card-top">
+            <div class="card-left">
+              <img src="images/magic-doodle.png" class="card-mini-icon" />
+              <span class="card-title">Magic Doodle</span>
+            </div>
+            <span class="card-chip">5h / PWA</span>
+          </div>
+          <div class="card-desc">虹色で自由に描けるお絵描きを実現。描いた絵が動く“魔法っぽい体験”を届ける。</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

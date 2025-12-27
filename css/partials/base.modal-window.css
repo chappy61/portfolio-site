@@ -1,0 +1,9 @@
+/* ========== モーダルウィンドウ ========== */
+/* モーダルの基本スタイル */
+.modal {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 24px;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}

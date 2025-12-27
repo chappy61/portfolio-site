@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0," name="viewport" />
+    <title>GAME-Gallery</title>
+    <link href="css/global.css" rel="stylesheet" />
+    <link href="css/layout.css" rel="stylesheet" />
+    <link href="css/components.css" rel="stylesheet" />
+    <link href="css/animations.css" rel="stylesheet" />
+    <link href="css/theme.css" rel="stylesheet" />
+    <link href="css/mobile.css" rel="stylesheet" />
+    <link href="css/game-gallery.css" rel="stylesheet" />
+  </head>
+  <body class="page-game win-theme">
+    <!-- ========================== -->
+    <!-- スマホ用GameUI（PC非表示） -->
+    <!-- ========================== -->
+    <div class="mobile-home-ui" id="mobileHomeUI">
+      <div class="status-bar">
+        <span class="mobile-time" id="mobileTime">23:58</span>
+        <span class="mobile-battery">📶　🔋83%</span>
+      </div>
+      <div class="overlay-layer" id="overlayLayer">
+        <!-- Game フォルダ（iPhone風） -->
+        <div class="folder-sheet" id="gameFolderSheet" role="dialog" aria-label="Game folder">
+          <div class="folder-header">
+            <span class="folder-title">Game</span>
+            <a href="index.html" class="folder-close">×</a>
+          </div>
+          <!-- 上：iPhoneのフォルダっぽいアイコン並び -->
+          <div class="folder-icons">
+            <a class="folder-icon" href="https://chappy61.github.io/mini-game/" target="_blank" rel="noopener">
+              <img src="images/mini-game.png" alt="Mini Game" />
+            </a>
+            <a class="folder-icon" href="https://chappy61.github.io/color/" target="_blank" rel="noopener">
+              <img src="images/color.png" alt="Color Game" />
+            </a>
+            <a class="folder-icon" href="https://magic-doodle.onrender.com/" target="_blank" rel="noopener noreferrer">
+              <img src="images/magic-doodle.png" alt="Magic Doodle" />
+            </a>
+          </div>
+          <!-- 下：ポートフォリオとして“説明” -->
+          <div class="folder-cards">
+            <a class="game-card" href="https://chappy61.github.io/mini-game/" target="_blank" rel="noopener">
+              <div class="card-top">
+                <div class="card-left">
+                  <img src="images/mini-game.png" class="card-mini-icon" />
+                  <span class="card-title">Mini Game</span>
+                </div>
+                <span class="card-chip">3h / JS</span>
+              </div>
+              <div class="card-desc">ポートフォリオ用の簡単なシューティングゲーム</div>
+            </a>
+            <a class="game-card" href="https://chappy61.github.io/color/" target="_blank" rel="noopener">
+              <div class="card-top">
+                <div class="card-left">
+                  <img src="images/color.png" class="card-mini-icon" />
+                  <span class="card-title">Color Game</span>
+                </div>
+                <span class="card-chip">3h / PWA</span>
+              </div>
+              <div class="card-desc">
+                子どもの「やりたい！」から制作。好きそうな効果音とテンポ感にこだわり、ボーナスステージも実装。
+              </div>
+            </a>
+            <a class="game-card" href="https://magic-doodle.onrender.com/" target="_blank" rel="noopener noreferrer">
+              <div class="card-top">
+                <div class="card-left">
+                  <img src="images/magic-doodle.png" class="card-mini-icon" />
+                  <span class="card-title">Magic Doodle</span>
+                </div>
+                <span class="card-chip">5h / PWA</span>
+              </div>
+              <div class="card-desc">虹色で自由に描けるお絵描きを実現。描いた絵が動く“魔法っぽい体験”を届ける。</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ========================== -->
+    <!-- ロード -->
+    <!-- ========================== -->
+    <div id="loading-overlay">
+      <div class="loading-text">Loading Game Archive...</div>
+    </div>
+    <div class="content">
+      <div class="viewport">
+        <div class="icon-area icon-area-l">
+          <!-- Backアイコン -->
+          <div class="icon back-node" id="icon-back">
+            <a class="folder-back-icon" data-app="Back" data-link="true" href="index.html">
+              <div class="folder-back-body"></div>
+            </a>
+            <span class="icon-label">Back</span>
+          </div>
+        </div>
+        <!-- ========================== -->
+        <!-- ゲーム一覧 -->
+        <!-- ========================== -->
+        <div class="window static-window">
+          <div class="window-header">
+            <div class="window-tabs" role="tablist" aria-label="Archive Tabs">
+              <button class="tab-btn is-active" type="button" data-tab="games" role="tab" aria-selected="true">
+                Games
+              </button>
+              <button class="tab-btn" type="button" data-tab="study" role="tab" aria-selected="false">Study</button>
+              <button class="tab-btn" type="button" data-tab="works" role="tab" aria-selected="false">Works</button>
+              <button class="tab-btn" type="button" data-tab="life" role="tab" aria-selected="false">Life</button>
+            </div>
+
+            <span class="log-close" role="button" aria-label="Close">✖</span>
+          </div>
+          <div class="archive-panels">
+            <!-- Games -->
+            <section class="tab-panel is-active" data-panel="games">
+              <div class="game-archive archive-layout" id="game-archive">
+                <a class="game-row" href="https://chappy61.github.io/mini-game/" rel="noopener" target="_blank">
+                  <img alt="Mini Game" class="game-icon" src="images/mini-game.png" />
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Mini Game</span>
+                      <span class="game-chip">JS</span>
+                    </div>
+                    <div class="game-desc">ポートフォリオ用の簡単なシューティングゲーム</div>
+                  </div>
+                </a>
+
+                <a class="game-row" href="https://chappy61.github.io/color/" rel="noopener" target="_blank">
+                  <img alt="Color Game" class="game-icon" src="images/color.png" />
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Color Game</span>
+                      <span class="game-chip">PWA / Audio</span>
+                    </div>
+                    <div class="game-desc">
+                      子どもの「やりたい！」から制作。好きそうな効果音とテンポ感にこだわり、ボーナスステージも実装。
+                    </div>
+                  </div>
+                </a>
+
+                <a class="game-row" href="https://magic-doodle.onrender.com/" rel="noopener noreferrer" target="_blank">
+                  <img alt="Magic Doodle" class="game-icon" src="images/magic-doodle.png" />
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Magic Doodle</span>
+                      <span class="game-chip">PWA / Canvas</span>
+                    </div>
+                    <div class="game-desc">
+                      虹色で自由に描けるお絵描きを実現。描いた絵が動く“魔法っぽい体験”を届ける。
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </section>
+            <!-- Study -->
+            <section class="tab-panel" data-panel="study">
+              <div class="game-archive archive-layout">
+                <!-- まずは仮でOK！あとでカード増やす -->
+                <a class="game-row" href="https://quotdict.onrender.com" target="_blank" rel="noopener">
+                  <img alt="QuotDict" class="game-icon" src="images/quotdict.png" />
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">QuotDict</span>
+                      <span class="game-chip">Flask / DB</span>
+                    </div>
+                    <div class="game-desc">
+                      “空白時間”で思考が止まる学習フローを解消する、引用・コード保存Web辞書。GitHub初公開／Renderデプロイ
+                    </div>
+                  </div>
+                </a>
+                <a class="game-row" href="https://vocad.onrender.com" target="_blank" rel="noopener">
+                  <img alt="Vocad" class="game-icon" src="images/vocad.png" />
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Vocad</span>
+                      <span class="game-chip">PWA / JS</span>
+                    </div>
+                    <div class="game-desc">
+                      日常英語と乖離した“プログラミング英語”を扱う単語帳。学習用途として継続拡張中。
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </section>
+
+            <!-- Works -->
+            <section class="tab-panel" data-panel="works">
+              <div class="game-archive archive-layout">
+                <div class="game-row" style="cursor: default">
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Disaster App UI Refactor</span>
+                      <span class="game-chip">UI/UX / Refactor</span>
+                    </div>
+                    <div class="game-desc">自社アプリのUI刷新・導線整理・CSS/JS整理（公開できる範囲で記述）。</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Life -->
+            <section class="tab-panel" data-panel="life">
+              <div class="game-archive archive-layout">
+                <div class="game-row" style="cursor: default">
+                  <div class="game-info">
+                    <div class="game-top">
+                      <span class="game-title">Attendance App (Planned)</span>
+                      <span class="game-chip">Web App</span>
+                    </div>
+                    <div class="game-desc">年末年始に制作予定：出勤表入力をラクにしてミスを減らす。</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ D -->
+          <!-- ========================== -->
+          <!-- 警告ウィンドウ D（NEW） -->
+          <div class="alert-window-d warning-d">
+            <button class="close-btn-d">✖</button>
+            <div class="alert-header-d" id="statusTitle">[ GAME_ARCHIVE.exe ]</div>
+            <div class="alert-body-d" id="statusBody">
+              Module: Playable Prototypes
+              <br />
+              Platform: JS / PWA
+              <br />
+              Build: Experimental
+              <br />
+              Focus: UX / Interaction / Playful Design
+              <br />
+              Code:
+              <code class="code-d" id="statusCode">0x003EE</code>
+              <br />
+              Status:
+              <span class="blink-d" id="statusStatus">Select an icon to launch.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--viewport-->
+    </div>
+    <!--content-->
+    <script src="js/global.js" type="module"></script>
+    <script src="js/game-gallery.js" type="module"></script>
+    <script src="js/mobile.js"></script>
+  </body>
+</html>

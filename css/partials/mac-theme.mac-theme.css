@@ -1,0 +1,13 @@
+/* ========== Macテーマ専用スタイル ========== */
+/* Macテーマのオーバーレイとウィンドウのクリック無効化 */
+.mac-theme .overlay,
+.mac-theme .window {
+  pointer-events: none;
+}
+
+/* Macテーマでのアイコンエリアとアイコンのクリック無効化 */
+.mac-theme .icon-area,
+.mac-theme .icon,
+.mac-theme .game-icon-specific {
+  pointer-events: none;
+}

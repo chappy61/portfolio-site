@@ -1,0 +1,18 @@
+/* ========== モバイルホームUI 全体 ========== */
+.mobile-home-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: linear-gradient(#0a0a0a, #1a1a2f);
+  color: #fff;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: 'Courier New', monospace;
+  padding: 12px var(--side-padding);
+  gap: 12px;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+}

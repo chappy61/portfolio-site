@@ -1,0 +1,2 @@
+/* NOTE: window.css は base.css に統合し、partials に分割しました */
+@import url("./base.css");

@@ -1,0 +1,12 @@
+/* ========== ノードとアイコンをつなぐ線 ========== */
+/* ノードとアイコンをつなぐ線 */
+.line {
+  position: absolute;
+  top: 5%;
+  left: 30%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.074);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 1;
+}

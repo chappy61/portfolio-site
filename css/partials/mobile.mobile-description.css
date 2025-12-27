@@ -1,0 +1,21 @@
+/* ========== 説明 ========== */
+#mobileLogContainer {
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  width: 90%;
+  height: 80%;
+  background-color: rgba(0,0,0,0.85);
+  padding: 1rem;
+  overflow-y: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  white-space: pre;
+  border-radius: 8px;
+  z-index: 99999;
+  user-select: text;
+  box-sizing: border-box;
+  color: #aee; /* 明るめの青に */
+  text-shadow: 0 0 2px #aee;
+}

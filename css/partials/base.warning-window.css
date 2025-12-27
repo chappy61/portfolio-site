@@ -1,0 +1,59 @@
+/* ========== 警告ウィンドウ ========== */
+/* 警告ウィンドウのスタイル */
+.win-theme .alert-window,
+.mac-theme .alert-window {
+  position: absolute;
+  width: 250px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #aaa;
+  color: #ccc;
+  font-family: "Courier New", monospace;
+  font-size: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 0 20px rgba(76, 76, 76, 0.033);
+  backdrop-filter: blur(3px);
+  z-index: 10;
+  pointer-events: none;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+/* 警告ウィンドウのボディ */
+.win-theme .alert-body,
+.mac-theme .alert-body {
+  height: 120%;
+  overflow: hidden;
+}
+
+/* 警告ウィンドウAの位置 */
+.win-theme .warning-a,
+.mac-theme .warning-a {
+  bottom: 5rem;
+  right: -22%;
+}
+
+/* 警告ウィンドウBの位置 */
+.win-theme .warning-b,
+.mac-theme .warning-b {
+  bottom: -3rem;
+  right: -13%;
+  z-index: 9;
+}
+
+/* 警告ウィンドウC（ステッカー風） */
+.win-theme .warning-c,
+.mac-theme .warning-c {
+  bottom: -3rem;
+  left: -12rem;
+  z-index: 9;
+  width: 180px;
+  height: 200px;
+  overflow: hidden;
+}
+
+/* 警告ウィンドウDの位置 */
+.win-theme .warning-d,
+.mac-theme .warning-d {
+  bottom: 6rem;
+  right: 10%;
+  z-index: 10;
+}

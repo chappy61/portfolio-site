@@ -1,0 +1,158 @@
+/* ========== 共通スタイル ========== */
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace, system-ui, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* ========== ローディングオーバーレイ ========== */
+#loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+.loading-bar-container {
+  text-align: center;
+  padding-top: 30px;
+}
+#loading-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  display: none !important; /* 確実に非表示 */
+}
+.loading-text {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.1em;
+  font-size: 1.2rem;
+  color: #888;
+  margin-bottom: 10px;
+  animation: fadeIn 1s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  0% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* ========== 自己紹介オーバーレイ ========== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
+  color: #b3fffd;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.overlay.active {
+  opacity: 1;
+}
+.hidden {
+  display: none !important;
+}
+
+/* ========== テーマ切り替えボタン ========== */
+.theme-switcher {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  display: flex;
+  gap: 0.5rem;
+}
+.theme-switcher button {
+  width: 64px;
+  height: 64px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  z-index: 10;
+}
+
+/* ========== メニューアイコン ========== */
+.menu-icon {
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.menu-icon span {
+  display: block;
+  height: 3px;
+  background-color: rgba(200, 200, 255, 0.6);
+  border-radius: 2px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 0 6px rgba(43, 55, 226, 0.5);
+}
+.menu-icon:hover span {
+  background-color: rgba(200, 200, 255, 0.9);
+  opacity: 0.8;
+  box-shadow: 0 0 12px rgba(28, 112, 176, 0.9);
+}
+
+/* ========== パーティクルエフェクト ========== */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 220, 240, 0.8);
+  box-shadow: 0 0 6px rgba(255, 220, 240, 0.6);
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 1.5s ease-out;
+}
+
+/* ========== テーマ共通スタイル ========== */
+.win-theme,
+.mac-theme {
+  --bg-color: #121212;
+  --window-bg: #1e1e1e;
+  --header-bg: #2a2a2a;
+  --text-color: #c0c0c0;
+  --accent-color: #66ccff;
+  --shadow-color: rgba(0, 0, 0, 0.8);
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: var(--text-color);
+  position: relative;
+}
+.win-theme::before,
+.mac-theme::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 0;
+}

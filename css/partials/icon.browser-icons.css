@@ -1,0 +1,106 @@
+/* ========== ブラウザ風アイコン ========== */
+/* ブラウザアイコンのラッパー */
+.icon-wrapper.icon-browser {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+/* Safariアイコンのスタイル */
+.icon-safari {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #4ab9ff, #007aff);
+  border: 2px solid white;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Safariの針（コンパス風） */
+.icon-safari::before,
+.icon-safari::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 10px;
+  transform-origin: center bottom;
+  border-radius: 1px;
+  transition: transform 2s ease-in-out;
+}
+
+/* Safariの青い針 */
+.icon-safari::before {
+  transform: translate(-50%, -100%) rotate(45deg);
+  background: #007aff;
+}
+
+/* Safariの赤い針 */
+.icon-safari::after {
+  transform: translate(-50%, -100%) rotate(-135deg);
+  background: #ff3b30;
+}
+
+/* Safariホバー時の針アニメーション */
+.icon-safari:hover::before {
+  transform: translate(-50%, -100%) rotate(-405deg);
+  transition: transform 0.8s ease;
+}
+
+.icon-safari:hover::after {
+  transform: translate(-50%, -100%) rotate(405deg);
+  transition: transform 1s ease;
+}
+
+/* Chromeアイコンのスタイル */
+.icon-chrome {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: conic-gradient(#db4437 0deg 120deg, #f4b400 120deg 240deg, #0f9d58 240deg 360deg),
+    radial-gradient(circle at center, #ffffffcc, #e0f7ffcc);
+  position: relative;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.6), 0 0 6px rgba(180, 220, 255, 0.2);
+  animation: shimmer 6s ease-in-out infinite;
+  transition: transform 0.8s ease;
+  transform: rotate(0deg);
+}
+
+/* Chromeアイコンの中央円（白） */
+.icon-chrome::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Chromeアイコンの中央円（青） */
+.icon-chrome::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 40%;
+  background: #4285f4;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+/* Chromeアイコンのホバーエフェクト */
+.icon-chrome:hover {
+  transform: rotate(360deg);
+  transition: all 0.8s ease;
+  background: conic-gradient(#f44336, #ff9800, #4caf50, #2196f3, #f44336);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}

@@ -1,0 +1,22 @@
+/* ========== メニューアイコン ========== */
+.menu-icon {
+  width: 30px;
+  height: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.menu-icon span {
+  display: block;
+  height: 3px;
+  background-color: rgba(200, 200, 255, 0.6);
+  border-radius: 2px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  box-shadow: 0 0 6px rgba(43, 55, 226, 0.5);
+}
+.menu-icon:hover span {
+  background-color: rgba(200, 200, 255, 0.9);
+  opacity: 0.8;
+  box-shadow: 0 0 12px rgba(28, 112, 176, 0.9);
+}

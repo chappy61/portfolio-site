@@ -1,0 +1,26 @@
+/* ========== クラゲ背景 ========== */
+.jellyfish-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.jellyfish {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 255, 255, 0.3) 0%, transparent 80%);
+  animation: floatUp 30s infinite ease-in-out;
+  filter: blur(3px);
+}
+.jellyfish:nth-child(1) { left: 20%; bottom: -60px; animation-duration: 28s; }
+.jellyfish:nth-child(2) { left: 55%; bottom: -80px; animation-duration: 33s; }
+.jellyfish:nth-child(3) { left: 35%; bottom: -100px; animation-duration: 36s; transform: scale(0.8); }
+
+@keyframes floatUp {
+  0% { transform: translateY(0) scale(1); opacity: 0.2; }
+  50% { transform: translateY(-50vh) scale(1.05); opacity: 0.5; }
+  100% { transform: translateY(-100vh) scale(0.95); opacity: 0; }
+}

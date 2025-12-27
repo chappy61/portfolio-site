@@ -1,0 +1,219 @@
+/* animations.css: 全てのアニメーション系 */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: rgba(255, 220, 240, 0.8);
+  box-shadow: 0 0 6px rgba(255, 220, 240, 0.6);
+  border-radius: 50%;
+  opacity: 1;
+  transition: all 1.5s ease-out;
+}
+
+.jellyfish-container {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.jellyfish {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(200, 255, 255, 0.3) 0%, transparent 80%);
+  animation: floatUp 30s infinite ease-in-out;
+  filter: blur(3px);
+}
+
+.jellyfish:nth-child(1) {
+  left: 20%;
+  bottom: -60px;
+  animation-duration: 28s;
+}
+
+.jellyfish:nth-child(2) {
+  left: 55%;
+  bottom: -80px;
+  animation-duration: 33s;
+}
+
+.jellyfish:nth-child(3) {
+  left: 35%;
+  bottom: -100px;
+  animation-duration: 36s;
+  transform: scale(0.8);
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translateY(-50vh) scale(1.05);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.95);
+    opacity: 0;
+  }
+}
+
+@keyframes folderPop {
+  from {
+    transform: translateY(10px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  19%,
+  21%,
+  23%,
+  25%,
+  54%,
+  56%,
+  100% {
+    opacity: 1;
+  }
+  20%,
+  24%,
+  55% {
+    opacity: 0.4;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes glowFloat {
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(255, 85, 85, 0.6), 0 0 8px rgba(255, 0, 0, 0.4), 0 0 12px rgba(0, 0, 0, 0.8);
+    transform: translateY(0);
+  }
+  50% {
+    text-shadow: 0 0 8px rgba(255, 85, 85, 0.9), 0 0 16px rgba(255, 0, 0, 0.7), 0 0 24px rgba(0, 0, 0, 1);
+    transform: translateY(-0.1em);
+  }
+}
+
+@keyframes glowFade {
+  0%,
+  100% {
+    opacity: 0.6;
+    text-shadow: 0 0 4px #00eaff, 0 0 15px #00eaff, 0 0 30px #00eaff;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px #00eaff, 0 0 25px #00eaff, 0 0 40px #00eaff, 0 0 60px #00eaff;
+  }
+}
+
+@keyframes wiggle {
+  0% {
+    transform: rotateZ(0);
+  }
+  50% {
+    transform: rotateZ(5deg);
+  }
+  100% {
+    transform: rotateZ(-5deg);
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes arm-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-12deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-6deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes arm-natural-swing {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(12deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  45% {
+    transform: rotate(8deg);
+  }
+  60% {
+    transform: rotate(-6deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  90% {
+    transform: rotate(-3deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes warning-scan {
+  0% {
+    transform: translateY(-120%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}

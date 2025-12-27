@@ -1,0 +1,263 @@
+/* index.css: index.html専用 */
+.icon-steam {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #1b2838;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.4), 0 0 6px rgba(102, 192, 244, 0.3);
+  animation: shimmer 6s ease-in-out infinite;
+  transition: transform 0.8s ease;
+  transform: rotate(0deg);
+  overflow: visible;
+}
+
+.joint.main-joint {
+  position: absolute;
+  top: 40%;
+  left: 60%;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: white;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.joint.main-joint::before {
+  content: "";
+  position: absolute;
+  top: 48%;
+  left: 51.5%;
+  width: 7px;
+  height: 7px;
+  background: white;
+  border: 2px solid #1b2838;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.steam-arm {
+  position: absolute;
+  width: 26px;
+  height: 8px;
+  background: white;
+  top: 65%;
+  left: 50%;
+  transform-origin: left center;
+  transform: translate(-50%, -50%) rotate(-35deg);
+  z-index: 1;
+  border-radius: 5px 2px 2px 5px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 15% 100%);
+  box-shadow: 0 0 4px rgba(102, 192, 244, 0.6);
+}
+
+.joint.sub-joint {
+  position: absolute;
+  top: 63%;
+  left: 28%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: white;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.joint.sub-joint::before {
+  content: "";
+  position: absolute;
+  top: 50.5%;
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border: 2px solid #1b2838;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.steam-arm-wrapper {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transform-origin: 28% 63%;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.icon-steam:hover .steam-arm-wrapper {
+  animation: arm-swing 1.2s ease-in-out;
+}
+
+.icon-steam:hover .steam-arm-wrapper.natural-swing {
+  animation: arm-natural-swing 1.5s ease-in-out infinite;
+}
+
+.mail-icon-open-wide {
+  position: relative;
+  width: 48px;
+  height: 38px;
+  perspective: 300px;
+}
+.mail-icon-cover {
+  position: relative;
+  width: 36px;
+  height: 26px;
+
+  background: linear-gradient(to bottom, #f6f6f6, #d7d7d7);
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+
+  /* 本体は影を持たない */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  z-index: 3;
+}
+
+.mail-icon-cover::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 36px;
+  height: 26px;
+
+  background: #c6c6c667;
+  border: 1px solid rgba(0, 0, 0, 0.048);
+  border-radius: 7px;
+
+  opacity: 0.9;
+  z-index: 2;
+}
+
+/* しっぽ（大きく・輪郭あり・同化しない） */
+.mail-icon-cover::after {
+  content: "";
+  position: absolute;
+  bottom: -7px;
+  left: 9px;
+
+  width: 0;
+  height: 0;
+
+  border-top: 8px solid #d7d7d7; /* 本体色 */
+  border-left: 7px solid transparent;
+  border-right: 2px solid transparent;
+
+  /* しっぽにも輪郭を付ける：drop-shadowで境界を作る */
+  filter: drop-shadow(0 1px 0 rgba(0, 0, 0, 0.22));
+  z-index: 3;
+  /* 影だけを後ろに飛ばす */
+  box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.mail-icon-cover:hover {
+  animation: wiggle 0.5s infinite;
+}
+
+.icon-safari {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, #4ab9ff, #007aff);
+  border: 2px solid white;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.5), 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.icon-safari::before,
+.icon-safari::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 2px;
+  height: 10px;
+  transform-origin: center bottom;
+  border-radius: 1px;
+  transition: transform 2s ease-in-out;
+}
+
+.icon-safari::before {
+  transform: translate(-50%, -100%) rotate(45deg);
+  background: #007aff;
+}
+
+.icon-safari::after {
+  transform: translate(-50%, -100%) rotate(-135deg);
+  background: #ff3b30;
+}
+
+.icon-safari:hover::before {
+  transform: translate(-50%, -100%) rotate(-405deg);
+  transition: transform 0.8s ease;
+}
+
+.icon-safari:hover::after {
+  transform: translate(-50%, -100%) rotate(405deg);
+  transition: transform 1s ease;
+}
+
+.icon-chrome {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: conic-gradient(#db4437 0deg 120deg, #f4b400 120deg 240deg, #0f9d58 240deg 360deg),
+    radial-gradient(circle at center, #ffffffcc, #e0f7ffcc);
+  position: relative;
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, 0.6), 0 0 6px rgba(180, 220, 255, 0.2);
+  animation: shimmer 6s ease-in-out infinite;
+  transition: transform 0.8s ease;
+  transform: rotate(0deg);
+}
+
+.icon-chrome::after {
+  content: "";
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.icon-chrome::before {
+  content: "";
+  position: absolute;
+  top: 30%;
+  left: 30%;
+  width: 40%;
+  height: 40%;
+  background: #4285f4;
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.icon-chrome:hover {
+  transform: rotate(360deg);
+  transition: all 0.8s ease;
+  background: conic-gradient(#f44336, #ff9800, #4caf50, #2196f3, #f44336);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.game-icon-img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(180, 220, 255, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.game-icon-img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(180, 220, 255, 0.45);
+}

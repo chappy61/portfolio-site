@@ -1,0 +1,115 @@
+/* ==========================
+   Pacman Loader（装置）
+   ========================== */
+.pacman-loader {
+  position: absolute;
+  top: 8px; /* ヘッダー内 or ウィンドウ上部に沿わせる */
+  left: 18px; /* 左から占領開始 */
+  width: 180px; /* ← 今のサイズそのまま */
+  height: 24px;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* パックマン本体 */
+.pacman-loader::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: #ffd100;
+  clip-path: polygon(0% 0%, 100% 0%, 68% 50%, 100% 100%, 0% 100%);
+  animation: pacman-move 6s linear infinite, pacman-chomp 0.5s ease-in-out infinite;
+}
+
+/* 食べられるブロックたち */
+.pacman-loader::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  width: 6px;
+  height: 6px;
+  transform: translateY(-50%);
+  border-radius: 2px;
+  box-shadow: 24px 0 0 #ff4bd6, 48px 0 0 #7bff3a, 72px 0 0 #ffa600;
+  animation: pacman-dots 6s linear infinite;
+}
+
+/* ゆっくり横断 */
+@keyframes pacman-move {
+  0% {
+    left: 0;
+  }
+  45% {
+    left: 140px;
+  }
+  50% {
+    left: 140px;
+  }
+  95% {
+    left: 0;
+  }
+  100% {
+    left: 0;
+  }
+}
+
+/* ぱくぱく */
+@keyframes pacman-chomp {
+  0%,
+  100% {
+    clip-path: polygon(0% 0%, 100% 0%, 68% 50%, 100% 100%, 0% 100%);
+  }
+  50% {
+    clip-path: polygon(0% 0%, 100% 18%, 56% 50%, 100% 82%, 0% 100%);
+  }
+}
+
+/* ブロックが食べられて復活する */
+@keyframes pacman-dots {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  } /* 食べられた */
+  60% {
+    opacity: 1;
+  } /* 復活 */
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 優しさ */
+@media (prefers-reduced-motion: reduce) {
+  .pacman-loader::before,
+  .pacman-loader::after {
+    animation: none;
+  }
+}
+/* 1) 既存のborder-bottomを無効化（線だけ差し替え） */
+.game-archive .window-header {
+  border-bottom: none; /* ←ここがキモ */
+  position: relative; /* 疑似要素の土台 */
+}
+
+/* 2) フル幅の下線を描く（左右ぴったり） */
+.game-archive .window-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--accent-color);
+  opacity: 0.9; /* 好みで */
+}

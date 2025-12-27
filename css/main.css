@@ -1,0 +1,10 @@
+/* AUTO-SPLIT: main.css は partials に分割しました。
+   見た目を壊さないため、読み込み順は維持しています。 */
+
+@import url("./partials/main.common.css");
+@import url("./partials/main.loading-overlay.css");
+@import url("./partials/main.profile-overlay.css");
+@import url("./partials/main.theme-toggle.css");
+@import url("./partials/main.menu-icon.css");
+@import url("./partials/main.particles.css");
+@import url("./partials/main.theme-common.css");

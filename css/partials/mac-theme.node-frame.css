@@ -1,0 +1,25 @@
+/* ========== ノードの囲い（Macテーマ専用） ========== */
+/* Macテーマでのノード囲い */
+.mac-theme .quotdict-node::before,
+.mac-theme .safari-node::before,
+.mac-theme .chrome-node::before,
+.mac-theme .steam-node::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: 0px;
+  width: calc(90% + 5px);
+  height: calc(70% + 10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Winテーマでのノード囲い非表示 */
+.win-theme .quotdict-node::before,
+.win-theme .safari-node::before,
+.win-theme .chrome-node::before,
+.win-theme .steam-node::before {
+  content: none;
+}

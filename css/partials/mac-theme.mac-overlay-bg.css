@@ -1,0 +1,16 @@
+/* ========== Macテーマのオーバーレイ背景 ========== */
+/* Macテーマの白スモークとぼかし効果 */
+.mac-theme::after,
+.mac-theme .window::after,
+.mac-theme .alert-window::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(2px);
+  pointer-events: none;
+  z-index: 5;
+}

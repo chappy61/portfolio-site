@@ -1,0 +1,9 @@
+/* ========== ノードコンテンツ ========== */
+/* ノードのコンテンツスタイル */
+.node-content {
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
